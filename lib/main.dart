@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:production_project/feature/landing/splash_screen.dart';
+import 'package:production_project/utils/app_theme.dart';
+import 'package:production_project/utils/strings.dart';
 
-void main() {
+import 'di/service_locator.dart' as di;
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.setUpServiceLocator();
   runApp(const MyApp());
 }
 
@@ -29,39 +37,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+    return MaterialApp(
+      builder: EasyLoading.init(),
+      debugShowCheckedModeBanner: false,
+      title: Strings.appName,
+      theme: AppTheme.define(),
+      home: const SplashScreen(),
     );
   }
 }
