@@ -1,3 +1,4 @@
+import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/di/service_locator.dart';
 import 'package:production_project/feature/categories/data/categories_repository.dart';
 import 'package:production_project/feature/categories/data/local/categories_local.dart';
@@ -12,5 +13,10 @@ class CategoriesRepositoryImpl implements CategoriesRepository{
   Future<List<CategoryModel>> getCategoryList() async{
     return remote.getCategoryList();
   }
+
+  Future<List<FurnitureModel>> getCategoryFurnitureList(String categoryName){
+    return remote.getCategoryFurnitureList(categoryName);
+  }
+
   
 }

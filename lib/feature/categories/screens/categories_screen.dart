@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/di/service_locator.dart';
 import 'package:production_project/feature/categories/model/category_model.dart';
 import 'package:production_project/feature/categories/screens/categories_viewmodel.dart';
+import 'package:production_project/feature/categories/screens/category_result_screen.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
@@ -114,7 +116,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget _categoryGridComponent(CategoryModel model) {
     return OnClickWidget(
       onClick: () {
-        showToast("hi", true);
+        Navigator.push(context, AnimScaleTransition(page: CategoryResultScreen(categoryModel: model)));
       },
       child: Card(
         child: Stack(

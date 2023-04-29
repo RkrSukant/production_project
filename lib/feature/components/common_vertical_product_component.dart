@@ -36,8 +36,6 @@ class _CommonVerticalProductComponentState
         ),
         child: OnClickWidget(
             onClick: () {
-              showToast("Hellliiii", true);
-              debugPrint("hi");
             },
             child: Padding(
               padding: const EdgeInsets.all(Dimens.spacing_16),
@@ -57,12 +55,12 @@ class _CommonVerticalProductComponentState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          widget.furnitureModel.title ?? "N/A",
+                          widget.furnitureModel.title,
                           style: text_2f3036_14_Bold_w700,
                         ),
                         addVerticalSpace(Dimens.spacing_4),
                         Text(
-                          widget.furnitureModel.category ?? "",
+                          widget.furnitureModel.category,
                           style: text_7b44c0_8_regular_w400,
                         ),
                         addVerticalSpace(Dimens.spacing_4),
@@ -83,7 +81,7 @@ class _CommonVerticalProductComponentState
                           style: text_7b44c0_10_bold_w600,
                         ),
                         Text(
-                          widget.furnitureModel.price.toString() ?? "0",
+                          widget.furnitureModel.price.toString(),
                           style: text_7b44c0_10_bold_w600,
                         )
                       ]),
