@@ -23,9 +23,8 @@ class _CommonVerticalProductComponentState
     extends State<CommonVerticalProductComponent> {
   @override
   Widget build(BuildContext context) {
-    return OnClickWidget(
-      onClick: (){
-        showToast("Hellliiii", true);
+    return InkWell(
+      onTap: (){
       },
       child: Card(
         elevation: 0,
@@ -36,7 +35,10 @@ class _CommonVerticalProductComponentState
               width: Dimens.spacing_0_5, color: AppColors.grey_rgba_E8E9F1),
         ),
         child: OnClickWidget(
-            onClick: () {},
+            onClick: () {
+              showToast("Hellliiii", true);
+              debugPrint("hi");
+            },
             child: Padding(
               padding: const EdgeInsets.all(Dimens.spacing_16),
               child: SizedBox(
