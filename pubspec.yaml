@@ -76,6 +76,7 @@ flutter:
     - assets/drawables/
     - assets/images/
     - assets/images/sort_by_rooms/
+    - assets/images/categories/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

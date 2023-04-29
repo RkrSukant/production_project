@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/common_models/room_model.dart';
 import 'package:production_project/di/service_locator.dart';
+import 'package:production_project/feature/categories/screens/categories_screen.dart';
 import 'package:production_project/feature/components/common_vertical_product_component.dart';
 import 'package:production_project/feature/home/screens/home_viewmodel.dart';
 import 'package:production_project/utils/colors.dart';
@@ -11,6 +13,7 @@ import 'package:production_project/utils/strings.dart';
 import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/utils.dart';
 import 'package:production_project/utils/widget_functions.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -78,48 +81,49 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _appBar(),
-      body: Container(
-        color: const AppColors().backGroundColor,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(Dimens.spacing_16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _searchTextFieldComponent(),
-                addVerticalSpace(Dimens.spacing_16),
-                _bannerComponent(ImageConstants.IC_Banner_1),
-                addVerticalSpace(Dimens.spacing_24),
-                const Text(
-                  Strings.featuredProducts,
-                  style: text_7b44c0_14_Medium_w600,
-                ),
-                addVerticalSpace(Dimens.spacing_16),
-                _productHorizontalListViewComponent(Strings.featuredProducts),
-                addVerticalSpace(Dimens.spacing_24),
-                _bannerComponent(ImageConstants.IC_Banner_2),
-                addVerticalSpace(Dimens.spacing_24),
-                const Text(
-                  Strings.ourNewReleases,
-                  style: text_7b44c0_14_Medium_w600,
-                ),
-                addVerticalSpace(Dimens.spacing_16),
-                _productHorizontalListViewComponent(Strings.ourNewReleases),
-                addVerticalSpace(Dimens.spacing_24),
-                const Text(
-                  Strings.viewByRoom,
-                  style: text_7b44c0_14_Medium_w600,
-                ),
-                addVerticalSpace(Dimens.spacing_16),
-                // Test2(),
-                _viewByRoomComponent(rooms),
-                addVerticalSpace(18),
-                _verticleComponent(FurnitureModel(id: 1, title: "hiiii", category: "testing", price: 100, desc: "jasdknjabbsdjhk asjidbikjasbnd asdjkhnasd", rooms: ["Test"], imageNames: ["Hi"])
-                )
-              ],
+    return ChangeNotifierProvider<HomeViewModel>(
+      create: (BuildContext context) => viewModel,
+      child: Scaffold(
+        appBar: _appBar(),
+        body: Container(
+          color: const AppColors().backGroundColor,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(Dimens.spacing_16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _searchTextFieldComponent(),
+                  addVerticalSpace(Dimens.spacing_16),
+                  _bannerComponent(ImageConstants.IC_Banner_1),
+                  addVerticalSpace(Dimens.spacing_24),
+                  const Text(
+                    Strings.featuredProducts,
+                    style: text_7b44c0_14_Medium_w600,
+                  ),
+                  addVerticalSpace(Dimens.spacing_16),
+                  _productHorizontalListViewComponent(Strings.featuredProducts),
+                  addVerticalSpace(Dimens.spacing_24),
+                  _bannerComponent(ImageConstants.IC_Banner_2),
+                  addVerticalSpace(Dimens.spacing_24),
+                  const Text(
+                    Strings.ourNewReleases,
+                    style: text_7b44c0_14_Medium_w600,
+                  ),
+                  addVerticalSpace(Dimens.spacing_16),
+                  _productHorizontalListViewComponent(Strings.ourNewReleases),
+                  addVerticalSpace(Dimens.spacing_24),
+                  const Text(
+                    Strings.viewByRoom,
+                    style: text_7b44c0_14_Medium_w600,
+                  ),
+                  addVerticalSpace(Dimens.spacing_16),
+                  // Test2(),
+                  _viewByRoomComponent(rooms),
+                  addVerticalSpace(18),
+                ],
+              ),
             ),
           ),
         ),
@@ -262,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _roomGridComponent(RoomModel model) {
     return OnClickWidget(
       onClick: (){
-        showToast("hi", true);
+        Navigator.push(context, AnimScaleTransition(page: const CategoriesScreen()));
       },
       child: Card(
         child: Stack(
@@ -284,10 +288,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _verticleComponent(FurnitureModel furnitureModel){
+  Widget _verticalComponent(FurnitureModel furnitureModel){
     return InkWell(
       onTap: (){
-        showToast("Hellliiii", true);
+        Navigator.push(context, AnimScaleTransition(page: const CategoriesScreen()));
       },
       child: Card(
         elevation: 0,

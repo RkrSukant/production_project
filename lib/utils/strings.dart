@@ -25,4 +25,5 @@ class Strings {
   static const String tryItYourself = 'Try it Yourself';
   static const String rooms = 'Rooms';
   static const String description = 'Description';
+  static const String something_went_wrong = 'Something went wrong';
 }

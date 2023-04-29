@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:production_project/anim/anim_scale_transition.dart';
-import 'package:production_project/feature/home_screen/home_screen.dart';
+import 'package:production_project/feature/home/screens/home_screen.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
 import 'package:production_project/utils/strings.dart';
