@@ -68,7 +68,9 @@ class _CommonVerticalProductComponentState
                         ),
                         addVerticalSpace(Dimens.spacing_4),
                         Text(
-                          "${widget.furnitureModel.desc.split(' ').take(15).join(' ')} ...",
+                          widget.furnitureModel.desc,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                           style: text_71727a_8_Regular_w400,
                         ),
                       ],
