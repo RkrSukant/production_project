@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/common_models/furniture_model.dart';
+import 'package:production_project/feature/product_display/screens/product_detail_screen.dart';
 import 'package:production_project/utils/strings.dart';
 import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/colors.dart';
@@ -36,6 +38,7 @@ class _CommonVerticalProductComponentState
         ),
         child: OnClickWidget(
             onClick: () {
+              Navigator.push(context, AnimScaleTransition(page: ProductDetailScreen(product: widget.furnitureModel)));
             },
             child: Padding(
               padding: const EdgeInsets.all(Dimens.spacing_16),
@@ -65,8 +68,7 @@ class _CommonVerticalProductComponentState
                         ),
                         addVerticalSpace(Dimens.spacing_4),
                         Text(
-                          widget.furnitureModel.desc,
-
+                          "${widget.furnitureModel.desc.split(' ').take(15).join(' ')} ...",
                           style: text_71727a_8_Regular_w400,
                         ),
                       ],

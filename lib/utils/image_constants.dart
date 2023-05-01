@@ -3,6 +3,7 @@ class ImageConstants {
   static const String IC_BACK_ICON = "assets/drawables/Back_icon.png";
   static const String IC_CLOSE_ICON = "assets/drawables/Close_icon.png";
   static const String IC_HAMBURGER_MENU_ICON = "assets/drawables/Hamburger_Menu.png";
+  static const String IC_AR_ICON = "assets/drawables/ARIcon.png";
   static const String IC_SEARCH_ICON = "assets/drawables/Search.png";
   static const String IC_Banner_1 = "assets/images/Banner_1.jpg";
   static const String IC_Banner_2 = "assets/images/Banner_2.jpg";
