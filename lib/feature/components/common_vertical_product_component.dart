@@ -27,6 +27,7 @@ class _CommonVerticalProductComponentState
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
+        Navigator.push(context, AnimScaleTransition(page: ProductDetailScreen(product: widget.furnitureModel,)));
       },
       child: Card(
         elevation: 0,
