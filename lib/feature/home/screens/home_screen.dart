@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/common_models/furniture_model.dart';
-import 'package:production_project/common_models/room_model.dart';
 import 'package:production_project/di/service_locator.dart';
 import 'package:production_project/feature/categories/screens/categories_screen.dart';
 import 'package:production_project/feature/components/common_vertical_product_component.dart';
 import 'package:production_project/feature/home/screens/home_viewmodel.dart';
+import 'package:production_project/feature/rooms/model/rooms_model.dart';
+import 'package:production_project/feature/rooms/screens/rooms_screen.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
@@ -156,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _searchTextFieldComponent() {
     return TextFormField(
-      onTap: (){
+      onTap: () {
         debugPrint("hehe");
       },
       readOnly: true,
@@ -186,7 +187,6 @@ class _HomeScreenState extends State<HomeScreen> {
             borderSide: const BorderSide(color: Color(0xFF006FFD)),
             borderRadius: BorderRadius.circular(12)),
       ),
-
     );
   }
 
@@ -209,8 +209,8 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: furnitures.length,
             itemBuilder: (BuildContext context, int index) {
               return CommonVerticalProductComponent(
-                  furnitureModel: furnitures[index],
-                );
+                furnitureModel: furnitures[index],
+              );
             },
             separatorBuilder: (BuildContext context, int index) {
               return addHorizontalSpace(Dimens.spacing_16);
@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: furnitures.length,
             itemBuilder: (BuildContext context, int index) {
               return OnClickWidget(
-                onClick: (){
+                onClick: () {
                   debugPrint("hiiii");
                 },
                 child: CommonVerticalProductComponent(
@@ -249,7 +249,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisExtent: ((MediaQuery.of(context).size.width - Dimens.spacing_48)/2)*(3/5),
+          mainAxisExtent:
+              ((MediaQuery.of(context).size.width - Dimens.spacing_48) / 2) *
+                  (3 / 5),
           mainAxisSpacing: Dimens.spacing_6,
           crossAxisSpacing: Dimens.spacing_8,
         ),
@@ -265,8 +267,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _roomGridComponent(RoomModel model) {
     return OnClickWidget(
-      onClick: (){
-        Navigator.push(context, AnimScaleTransition(page: const CategoriesScreen()));
+      onClick: () {
+        Navigator.push(
+            context, AnimScaleTransition(page: const RoomsScreen()));
       },
       child: Card(
         child: Stack(
@@ -279,19 +282,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: BoxFit.cover,
               ),
             ),
-            Center(child: Padding(
-              padding: const EdgeInsets.all(Dimens.spacing_8),
-                child: Text(model.title,style: text_ffffff_16_Bold_w700,textAlign: TextAlign.center,))),
+            Center(
+                child: Padding(
+                    padding: const EdgeInsets.all(Dimens.spacing_8),
+                    child: Text(
+                      model.title,
+                      style: text_ffffff_16_Bold_w700,
+                      textAlign: TextAlign.center,
+                    ))),
           ],
         ),
       ),
     );
   }
 
-  Widget _verticalComponent(FurnitureModel furnitureModel){
+  Widget _verticalComponent(FurnitureModel furnitureModel) {
     return InkWell(
-      onTap: (){
-        Navigator.push(context, AnimScaleTransition(page: const CategoriesScreen()));
+      onTap: () {
+        Navigator.push(
+            context, AnimScaleTransition(page: const CategoriesScreen()));
       },
       child: Card(
         elevation: 0,
@@ -332,25 +341,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         addVerticalSpace(Dimens.spacing_4),
                         Text(
                           furnitureModel.desc,
-
                           style: text_71727a_8_Regular_w400,
                         ),
                       ],
                     ),
                     addVerticalSpace(Dimens.spacing_16),
                     Center(
-                      child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              Strings.nRs,
-                              style: text_7b44c0_10_bold_w600,
-                            ),
-                            Text(
-                              furnitureModel.price.toString() ?? "0",
-                              style: text_7b44c0_10_bold_w600,
-                            )
-                          ]),
+                      child: Row(mainAxisSize: MainAxisSize.min, children: [
+                        const Text(
+                          Strings.nRs,
+                          style: text_7b44c0_10_bold_w600,
+                        ),
+                        Text(
+                          furnitureModel.price.toString() ?? "0",
+                          style: text_7b44c0_10_bold_w600,
+                        )
+                      ]),
                     ),
                   ],
                 ),

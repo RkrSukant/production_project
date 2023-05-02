@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/categories/model/category_model.dart';
-import 'package:production_project/feature/categories/screens/categories_viewmodel.dart';
-import 'package:production_project/feature/categories/screens/category_result_screen.dart';
+import 'package:production_project/feature/rooms/model/rooms_model.dart';
+import 'package:production_project/feature/rooms/screens/room_result_screen.dart';
+import 'package:production_project/feature/rooms/screens/rooms_viewmodel.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
@@ -14,18 +14,18 @@ import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/utils.dart';
 import 'package:provider/provider.dart';
 
-class CategoriesScreen extends StatefulWidget {
-  const CategoriesScreen({Key? key}) : super(key: key);
+class RoomsScreen extends StatefulWidget {
+  const RoomsScreen({Key? key}) : super(key: key);
 
   @override
-  State<CategoriesScreen> createState() => _CategoriesScreenState();
+  State<RoomsScreen> createState() => _RoomsScreenState();
 }
 
-class _CategoriesScreenState extends State<CategoriesScreen> {
+class _RoomsScreenState extends State<RoomsScreen> {
 
-  CategoriesViewModel viewModel = locator<CategoriesViewModel>();
+  RoomsViewModel viewModel = locator<RoomsViewModel>();
 
-  List<CategoryModel> categories = [];
+  List<RoomModel> rooms = [];
 
   @override
   void initState() {
@@ -34,12 +34,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   }
 
   void fetchData() async {
-    await Future.wait([viewModel.getCategoryList()]);
+    await Future.wait([viewModel.getRoomList()]);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CategoriesViewModel>(
+    return ChangeNotifierProvider<RoomsViewModel>(
       create: (BuildContext context) => viewModel,
       child: Scaffold(
         appBar: _appBar(),
@@ -47,7 +47,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           color: const AppColors().backGroundColor,
           child: Padding(
             padding: const EdgeInsets.all(Dimens.spacing_16),
-            child: _observeCategoryListResponse(),
+            child: _observeRoomListResponse(),
           ),
         ),
       ),
@@ -60,7 +60,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       backgroundColor: AppColors.white_rbga_ffffff,
       elevation: 0,
       title: const Text(
-        Strings.categories,
+        Strings.rooms,
         style: text_1f2024_14_Bold_w800,
       ),
       leading: Builder(builder: (context) {
@@ -79,15 +79,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     );
   }
 
-  Widget _observeCategoryListResponse() {
-    return Consumer<CategoriesViewModel>(builder: (context, viewModel, _) {
-      switch (viewModel.categoryListUseCase.state) {
+  Widget _observeRoomListResponse() {
+    return Consumer<RoomsViewModel>(builder: (context, viewModel, _) {
+      switch (viewModel.roomListUseCase.state) {
         case ResponseState.LOADING:
           EasyLoading.show();
           return Container();
         case ResponseState.COMPLETE:
           EasyLoading.dismiss();
-          List<CategoryModel> items = viewModel.categoryListUseCase.data ?? [];
+          List<RoomModel> items = viewModel.roomListUseCase.data ?? [];
           return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -101,7 +101,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               shrinkWrap: true,
               itemCount: items.length,
               itemBuilder: (context, index) {
-                return _categoryGridComponent(
+                return _roomGridComponent(
                     items[index]);
               }
           );
@@ -113,10 +113,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     });
   }
 
-  Widget _categoryGridComponent(CategoryModel model) {
+  Widget _roomGridComponent(RoomModel model) {
     return OnClickWidget(
       onClick: () {
-        Navigator.push(context, AnimScaleTransition(page: CategoryResultScreen(categoryName: model.categoryName)));
+        Navigator.push(context, AnimScaleTransition(page: RoomResultScreen(roomName: model.title)));
       },
       child: Card(
         child: Stack(
@@ -131,7 +131,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
             Center(child: Padding(
                 padding: const EdgeInsets.all(Dimens.spacing_8),
-                child: Text(model.categoryName, style: text_ffffff_16_Bold_w700,
+                child: Text(model.title, style: text_ffffff_16_Bold_w700,
                   textAlign: TextAlign.center,))),
           ],
         ),

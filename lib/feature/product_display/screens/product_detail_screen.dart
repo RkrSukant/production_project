@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/di/service_locator.dart';
+import 'package:production_project/feature/categories/screens/category_result_screen.dart';
 import 'package:production_project/feature/product_display/screens/product_detail_viewmodel.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
@@ -163,7 +165,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         addHorizontalSpace(Dimens.spacing_8),
         InkWell(
           onTap: () {
-            showToast("Hi", true);
+            Navigator.push(context, AnimScaleTransition(page: CategoryResultScreen( categoryName: product.category,)));
           },
           child: Text(
             product.category,

@@ -20,6 +20,13 @@ import 'package:production_project/feature/product_display/data/product_detail_r
 import 'package:production_project/feature/product_display/data/remote/product_detail_remote.dart';
 import 'package:production_project/feature/product_display/data/remote/product_detail_remote_impl.dart';
 import 'package:production_project/feature/product_display/screens/product_detail_viewmodel.dart';
+import 'package:production_project/feature/rooms/data/local/rooms_local.dart';
+import 'package:production_project/feature/rooms/data/local/rooms_local_impl.dart';
+import 'package:production_project/feature/rooms/data/remote/rooms_remote.dart';
+import 'package:production_project/feature/rooms/data/remote/rooms_remote_impl.dart';
+import 'package:production_project/feature/rooms/data/rooms_repository.dart';
+import 'package:production_project/feature/rooms/data/rooms_repository_impl.dart';
+import 'package:production_project/feature/rooms/screens/rooms_viewmodel.dart';
 import 'package:production_project/feature/search/data/local/search_local.dart';
 import 'package:production_project/feature/search/data/local/search_local_impl.dart';
 import 'package:production_project/feature/search/data/remote/search_remote.dart';
@@ -43,6 +50,12 @@ Future setUpServiceLocator() async {
   locator.registerLazySingleton<CategoriesRemote>(() => CategoriesRemoteImpl());
   locator.registerLazySingleton<CategoriesRepository>(() => CategoriesRepositoryImpl());
   locator.registerFactory<CategoriesViewModel>(() => CategoriesViewModel());
+
+  //rooms
+  locator.registerLazySingleton<RoomsLocal>(() => RoomsLocalImpl());
+  locator.registerLazySingleton<RoomsRemote>(() => RoomsRemoteImpl());
+  locator.registerLazySingleton<RoomsRepository>(() => RoomsRepositoryImpl());
+  locator.registerFactory<RoomsViewModel>(() => RoomsViewModel());
 
   //search
   locator.registerLazySingleton<SearchLocal>(() => SearchLocalImpl());
