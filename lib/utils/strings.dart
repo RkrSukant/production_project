@@ -26,4 +26,6 @@ class Strings {
   static const String rooms = 'Rooms';
   static const String description = 'Description';
   static const String something_went_wrong = 'Something went wrong';
+  static const String search_result_for = 'Search Results for:';
+  static const String no_data = 'No Data';
 }
