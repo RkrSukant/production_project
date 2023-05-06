@@ -55,10 +55,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return AppBar(
       backgroundColor: AppColors.white_rbga_ffffff,
       elevation: 0,
-      title: const Text(
-        Strings.categories,
-        style: text_1f2024_14_Bold_w800,
-      ),
       leading: Builder(builder: (context) {
         return IconButton(
           icon: Image.asset(

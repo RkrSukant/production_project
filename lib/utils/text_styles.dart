@@ -92,3 +92,8 @@ const TextStyle text_ffffff_16_Regular_w400 = TextStyle(
     color: AppColors.white_rbga_ffffff,
     fontWeight: FontWeight.w500,
     fontSize: Dimens.text_size_16);
+
+const TextStyle text_1F2024_16_Regular_w400 = TextStyle(
+    color: AppColors.black_rgba_1F2024,
+    fontWeight: FontWeight.w500,
+    fontSize: Dimens.text_size_16);

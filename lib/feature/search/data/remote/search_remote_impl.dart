@@ -40,7 +40,6 @@ class SearchRemoteImpl implements SearchRemote {
           desc: "Lorem Ipsum",
           rooms: ["rooms"],
           imageNames: ["imageNames"]),
-
     ];
     return furnitures;
   }

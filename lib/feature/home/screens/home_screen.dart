@@ -6,10 +6,13 @@ import 'package:production_project/feature/categories/screens/categories_screen.
 import 'package:production_project/feature/components/common_vertical_product_component.dart';
 import 'package:production_project/feature/home/screens/home_viewmodel.dart';
 import 'package:production_project/feature/rooms/model/rooms_model.dart';
+import 'package:production_project/feature/rooms/screens/room_result_screen.dart';
 import 'package:production_project/feature/rooms/screens/rooms_screen.dart';
+import 'package:production_project/feature/search/screens/search_screen.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
+import 'package:production_project/utils/navigator_drawer_component.dart';
 import 'package:production_project/utils/strings.dart';
 import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/utils.dart';
@@ -85,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return ChangeNotifierProvider<HomeViewModel>(
       create: (BuildContext context) => viewModel,
       child: Scaffold(
+        drawer: const NavigatorDrawerComponent(),
         appBar: _appBar(),
         body: Container(
           color: const AppColors().backGroundColor,
@@ -149,7 +153,9 @@ class _HomeScreenState extends State<HomeScreen> {
             height: Dimens.spacing_20,
             color: AppColors.black_rgba_1f2024,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Scaffold.of(context).openDrawer();//todo cxheck
+          },
         );
       }),
     );
@@ -158,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _searchTextFieldComponent() {
     return TextFormField(
       onTap: () {
-        debugPrint("hehe");
+        Navigator.push(context, AnimScaleTransition(page: const SearchScreen()));
       },
       readOnly: true,
       style: text_1f2024_14_Regular_w400,
@@ -269,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return OnClickWidget(
       onClick: () {
         Navigator.push(
-            context, AnimScaleTransition(page: const RoomsScreen()));
+            context, AnimScaleTransition(page: RoomResultScreen(roomName: model.title)));
       },
       child: Card(
         child: Stack(
@@ -292,76 +298,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ))),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _verticalComponent(FurnitureModel furnitureModel) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context, AnimScaleTransition(page: const CategoriesScreen()));
-      },
-      child: Card(
-        elevation: 0,
-        color: AppColors.purple_light_rgba_f8e2ff,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(Dimens.spacing_16)),
-          side: BorderSide(
-              width: Dimens.spacing_0_5, color: AppColors.grey_rgba_E8E9F1),
-        ),
-        child: OnClickWidget(
-            onClick: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(Dimens.spacing_16),
-              child: SizedBox(
-                width: Dimens.spacing_164,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      ImageConstants.IC_PLACEHOLDER,
-                      width: Dimens.spacing_124,
-                    ),
-                    addVerticalSpace(Dimens.spacing_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          furnitureModel.title ?? "N/A",
-                          style: text_2f3036_14_Bold_w700,
-                        ),
-                        addVerticalSpace(Dimens.spacing_4),
-                        Text(
-                          furnitureModel.category ?? "",
-                          style: text_7b44c0_8_regular_w400,
-                        ),
-                        addVerticalSpace(Dimens.spacing_4),
-                        Text(
-                          furnitureModel.desc,
-                          style: text_71727a_8_Regular_w400,
-                        ),
-                      ],
-                    ),
-                    addVerticalSpace(Dimens.spacing_16),
-                    Center(
-                      child: Row(mainAxisSize: MainAxisSize.min, children: [
-                        const Text(
-                          Strings.nRs,
-                          style: text_7b44c0_10_bold_w600,
-                        ),
-                        Text(
-                          furnitureModel.price.toString() ?? "0",
-                          style: text_7b44c0_10_bold_w600,
-                        )
-                      ]),
-                    ),
-                  ],
-                ),
-              ),
-            )),
       ),
     );
   }

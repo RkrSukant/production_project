@@ -36,8 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void fetchData(String searchText) async {
-    await Future.wait(
-        [viewModel.getFurnitureList((furnitures) => furnitures = furnitures)]);
+    var response = await viewModel.getFurnitureList();
   }
 
   @override
@@ -89,13 +88,15 @@ class _SearchScreenState extends State<SearchScreen> {
           EasyLoading.show();
           return Container();
         case ResponseState.COMPLETE:
+          furnitures = viewModel.searchListUseCase.data ?? [];
           EasyLoading.dismiss();
-
-          return Column(children: [
-            _searchBarWidget(),
-            addVerticalSpace(Dimens.spacing_16),
-            _searchResultWidget()
-          ]);
+          return SingleChildScrollView(
+            child: Column(children: [
+              _searchBarWidget(),
+              addVerticalSpace(Dimens.spacing_16),
+              _searchResultWidget()
+            ]),
+          );
         case ResponseState.ERROR:
           return const Center(
             child: Text(Strings.something_went_wrong),
@@ -124,14 +125,14 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             contentPadding:
-                const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             hintText: Strings.search,
             hintStyle: text_8f9098_14_Regular_w400,
             filled: true,
             fillColor: const Color.fromRGBO(255, 255, 255, 1),
             enabledBorder: OutlineInputBorder(
               borderSide:
-                  const BorderSide(color: Color.fromRGBO(197, 198, 204, 1)),
+              const BorderSide(color: Color.fromRGBO(197, 198, 204, 1)),
               borderRadius: BorderRadius.circular(12),
             ),
             focusedBorder: OutlineInputBorder(
@@ -141,8 +142,11 @@ class _SearchScreenState extends State<SearchScreen> {
           onChanged: (searchValue) {
             setState(() {
               tempFurnitureList = [];
+              if(searchValue == ""){
+                return;
+              }
               for (var furniture in furnitures) {
-                if (furniture.title.contains(searchValue)) {
+                if (furniture.title.toLowerCase().contains(searchValue.toLowerCase())) {
                   tempFurnitureList.add(furniture);
                 }
               }
@@ -153,18 +157,17 @@ class _SearchScreenState extends State<SearchScreen> {
         Visibility(
             visible: searchResultVisible ?? false,
             child: Text(
-                "${Strings.search_result_for} \"${searchTextController.text}\""))
+                "${Strings.search_result_for} \"${searchTextController
+                    .text}\""))
       ],
     );
   }
 
   Widget _searchResultWidget() {
     return GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: (1/1.5),
           crossAxisCount: 2,
-          mainAxisExtent:
-              ((MediaQuery.of(context).size.width - Dimens.spacing_48) / 2) *
-                  (3 / 5),
           mainAxisSpacing: Dimens.spacing_6,
           crossAxisSpacing: Dimens.spacing_8,
         ),

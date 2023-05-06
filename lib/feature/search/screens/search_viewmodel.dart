@@ -15,7 +15,13 @@ class SearchViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<void> getFurnitureList(Function(List<FurnitureModel>) callback) async {
-    await repository.getFurnitureList();
+  Future<void> getFurnitureList() async {
+    setSearchListUseCase(Response.loading());
+    try {
+      var response = await repository.getFurnitureList();
+      setSearchListUseCase(Response.complete(response));
+    }on Exception catch (exception){
+      setSearchListUseCase(Response.error(exception.toString()));
+    }
   }
 }
