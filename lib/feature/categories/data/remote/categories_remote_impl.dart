@@ -1,84 +1,50 @@
+import 'dart:convert';
+
 import 'package:production_project/common_models/furniture_model.dart';
+import 'package:production_project/di/service_locator.dart';
 import 'package:production_project/feature/categories/data/remote/categories_remote.dart';
 import 'package:production_project/feature/categories/model/category_model.dart';
+import 'package:production_project/remote/api_constants.dart';
+import 'package:production_project/remote/dio/base_list_response.dart';
+import 'package:production_project/remote/dio/base_response.dart';
+import 'package:production_project/remote/errors.dart';
+import 'package:production_project/remote/http_client.dart';
+import 'package:production_project/remote/not_null_mapper.dart';
 import 'package:production_project/utils/image_constants.dart';
 
 class CategoriesRemoteImpl implements CategoriesRemote {
+  static final ApiClient _apiClient = locator<ApiClient>();
+
   @override
   Future<List<CategoryModel>> getCategoryList() async {
-    List<CategoryModel> items = [
-      CategoryModel(
-          id: 1,
-          categoryName: "Sofa",
-          imageName: ImageConstants.IC_CATEGORY_SOFA),
-      CategoryModel(
-          id: 2,
-          categoryName: "Chair",
-          imageName: ImageConstants.IC_CATEGORY_CHAIRS),
-      CategoryModel(
-          id: 3,
-          categoryName: "Desk Chair",
-          imageName: ImageConstants.IC_CATEGORY_DESK_CHAIR),
-      CategoryModel(
-          id: 4,
-          categoryName: "Desk",
-          imageName: ImageConstants.IC_CATEGORY_DESK),
-      CategoryModel(
-          id: 5,
-          categoryName: "Coffee Table",
-          imageName: ImageConstants.IC_CATEGORY_COFFEE_TABLE),
-      CategoryModel(
-          id: 6,
-          categoryName: "Side Table",
-          imageName: ImageConstants.IC_CATEGORY_SIDE_TABLE),
-    ];
-    return items;
+    try {
+      var result = await _apiClient.dio.get(ApiConstants.categories);
+      var baseResponse = BaseListResponse<CategoryModel>.fromJson(
+          json.decode(result.toString()), (data) {
+        return data.map((response) => CategoryModel.fromJson(response))
+            .toList();
+      });
+      return notNullMapperListRest(baseResponse);
+    } on Exception catch (exception) {
+      throw FailedResponseException(exception.toString());
+    }
   }
 
   @override
-  Future<List<FurnitureModel>> getCategoryFurnitureList(String categoryName) async{
-    List<FurnitureModel> items = [
-      FurnitureModel(
-          id: 1,
-          title: "lorem ipsum furniture",
-          category: categoryName,
-          price: 20000,
-          desc: "Lorem ipsum is lorem ipsum is furniture",
-          rooms: ["Room"],
-          imageNames: ["imageNames"]),
-      FurnitureModel(
-          id: 2,
-          title: "lorem ipsum furniture",
-          category: categoryName,
-          price: 20000,
-          desc: "Lorem ipsum is lorem ipsum is furniture",
-          rooms: ["Room"],
-          imageNames: ["imageNames"]),
-      FurnitureModel(
-          id: 3,
-          title: "lorem ipsum furniture",
-          category: categoryName,
-          price: 20000,
-          desc: "Lorem ipsum is lorem ipsum is furniture",
-          rooms: ["Room"],
-          imageNames: ["imageNames"]),
-      FurnitureModel(
-          id: 4,
-          title: "lorem ipsum furniture",
-          category: categoryName,
-          price: 20000,
-          desc: "Lorem ipsum is lorem ipsum is furniture",
-          rooms: ["Room"],
-          imageNames: ["imageNames"]),
-      FurnitureModel(
-          id: 5,
-          title: "lorem ipsum furniture",
-          category: categoryName,
-          price: 20000,
-          desc: "Lorem ipsum is lorem ipsum is furniture",
-          rooms: ["Room"],
-          imageNames: ["imageNames"]),
-    ];
-    return items;
+  Future<List<FurnitureModel>> getCategoryFurnitureList(
+      String categoryName) async {
+    try {
+      var result = await _apiClient.dio.get(ApiConstants.furnituresByCategory,
+        queryParameters: {"categoryName": categoryName}
+      );
+      var baseResponse = BaseListResponse<FurnitureModel>.fromJson(
+          json.decode(result.toString()), (data) {
+        return data.map((response) => FurnitureModel.fromJson(response))
+            .toList();
+      });
+      return notNullMapperListRest(baseResponse);
+    }on Exception catch (exception){
+      throw FailedResponseException(exception.toString());
+    }
   }
 }

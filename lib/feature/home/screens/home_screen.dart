@@ -39,33 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void fetchData() {}
 
   final List<FurnitureModel> furnitures = [
-    FurnitureModel(
-        id: 1,
-        title: "Lorem Ipsum asdbga asjdbas asjdhajs asjdha",
-        category: "category",
-        price: 20000.0,
-        desc:
-            "hjasbdnba asdhajhnsbd asdhhas dasd asdbas duiqawh asuidbas dasud ajns dihahs djhka sjdn aiyhksdioa sdjb auiysd asjhbdnma sd jha sdbjha sjh d",
-        rooms: ["Room 1, Room 2"],
-        imageNames: []),
-    FurnitureModel(
-        id: 2,
-        title: "Lorem Ipsum 2",
-        category: "category2",
-        price: 10000.0,
-        desc:
-            "hjasbdnba asdhajhnsbd asdhhas dasd asdbas duiqawh asuidbas dasud ajns dihahs djhka sjdn aiyhksdioa sdjb auiysd asjhbdnma sd jha sdbjha sjh d",
-        rooms: [],
-        imageNames: []),
-    FurnitureModel(
-        id: 3,
-        title: "Lorem Ipsum 3",
-        category: "category2",
-        price: 10000.0,
-        desc:
-            "hjasbdnba asdhajhnsbd asdhhas dasd asdbas duiqawh asuidbas dasud ajns dihahs djhka sjdn aiyhksdioa sdjb auiysd asjhbdnma sd jha sdbjha sjh d",
-        rooms: [],
-        imageNames: []),
   ];
 
   final List<RoomModel> rooms = [

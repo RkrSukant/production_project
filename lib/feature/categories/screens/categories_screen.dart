@@ -106,6 +106,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               }
           );
         case ResponseState.ERROR:
+          EasyLoading.dismiss();
+          debugPrint(viewModel.categoryListUseCase.exception);
           return const Center(child: Text(Strings.something_went_wrong),);
         default:
           return Container();
@@ -124,7 +126,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(Dimens.spacing_12),
-              child: Image.asset(
+              child: Image.network(
                 model.imageName,
                 fit: BoxFit.cover,
               ),

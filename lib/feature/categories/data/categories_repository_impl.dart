@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/di/service_locator.dart';
 import 'package:production_project/feature/categories/data/categories_repository.dart';
@@ -11,9 +12,12 @@ class CategoriesRepositoryImpl implements CategoriesRepository{
 
   @override
   Future<List<CategoryModel>> getCategoryList() async{
-    return remote.getCategoryList();
+    dynamic response =remote.getCategoryList();
+    debugPrint(response.toString());
+    return response;
   }
 
+  @override
   Future<List<FurnitureModel>> getCategoryFurnitureList(String categoryName){
     return remote.getCategoryFurnitureList(categoryName);
   }

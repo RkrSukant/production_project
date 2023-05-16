@@ -34,10 +34,14 @@ import 'package:production_project/feature/search/data/remote/search_remote_impl
 import 'package:production_project/feature/search/data/search_repository.dart';
 import 'package:production_project/feature/search/data/search_repository_impl.dart';
 import 'package:production_project/feature/search/screens/search_viewmodel.dart';
+import 'package:production_project/remote/http_client.dart';
 
 final GetIt locator =GetIt.instance;
 
 Future setUpServiceLocator() async {
+
+  //for api
+  locator.registerLazySingleton(() => ApiClient());
 
   //home
   locator.registerLazySingleton<HomeLocal>(() => HomeLocalImpl());

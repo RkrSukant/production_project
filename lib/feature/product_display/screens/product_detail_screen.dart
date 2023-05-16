@@ -110,12 +110,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
-  Widget _productDetailImageWidget(List<String> imageNames) {
+  Widget _productDetailImageWidget(String imageNames) {
     return Padding(
       padding: const EdgeInsets.all(Dimens.spacing_16),
-      child: Image.asset((imageNames.isNotEmpty)
-          ? imageNames[0]
-          : ImageConstants.IC_PLACEHOLDER),
+      child: Image.network(
+          (imageNames != "") ? imageNames : ImageConstants.IC_PLACEHOLDER),
     );
   }
 
@@ -161,7 +160,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         addHorizontalSpace(Dimens.spacing_8),
         InkWell(
           onTap: () {
-            Navigator.push(context, AnimScaleTransition(page: CategoryResultScreen( categoryName: product.category,)));
+            Navigator.push(
+                context,
+                AnimScaleTransition(
+                    page: CategoryResultScreen(
+                  categoryName: product.category,
+                )));
           },
           child: Text(
             product.category,
@@ -180,35 +184,34 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           style: text_71727a_14_Light_w300,
         ),
         addHorizontalSpace(Dimens.spacing_8),
-        Row(
-          children: (product.rooms.isEmpty)
-              ? [const Text("N/A",style: text_7b44c0_16_Regular_w500_underline)]
-              : product.rooms
-                  .map((e) => InkWell(
-                        onTap: () {
-                          showToast("Hi", true);
-                        },
-                        child: Text(
-                          e.toString(),
-                          style: text_7b44c0_16_Regular_w500_underline,
-                        ),
-                      ))
-                  .toList(),
-        )
+        InkWell(
+          onTap: () {
+            showToast("Hi", true);
+          },
+          child: Text(
+            product.room.toString(),
+            style: text_7b44c0_16_Regular_w500_underline,
+          ),
+        ),
       ],
     );
   }
 
   Widget _descriptionWidget(FurnitureModel product) {
     return Padding(
-      padding:  const EdgeInsets.symmetric(horizontal: Dimens.spacing_8),
+      padding: const EdgeInsets.symmetric(horizontal: Dimens.spacing_8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "${Strings.description}:", style: text_2f3036_14_Bold_w500,),
+            "${Strings.description}:",
+            style: text_2f3036_14_Bold_w500,
+          ),
           addVerticalSpace(Dimens.spacing_6),
-          Text(product.desc, style: text_71727a_14_Light_w300,)
+          Text(
+            product.desc,
+            style: text_71727a_14_Light_w300,
+          )
         ],
       ),
     );
