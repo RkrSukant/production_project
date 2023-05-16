@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<HomeViewModel>(builder: (context, viewModel, _) {
       switch (viewModel.featuredFurnitureListUseCase.state) {
         case ResponseState.LOADING:
-          return Container();
+          return const Center(child: CircularProgressIndicator());
         case ResponseState.COMPLETE:
           List<FurnitureModel> furnitures =
               viewModel.featuredFurnitureListUseCase.data ?? [];
@@ -216,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<HomeViewModel>(builder: (context, viewModel, _) {
       switch(viewModel.latestFurnitureListUseCase.state){
         case ResponseState.LOADING:
-          return Container();
+          return const Center(child: CircularProgressIndicator());
         case ResponseState.COMPLETE:
           List<FurnitureModel> furnitures =
               viewModel.featuredFurnitureListUseCase.data ?? [];
@@ -225,14 +225,9 @@ class _HomeScreenState extends State<HomeScreen> {
             scrollDirection: Axis.horizontal,
             itemCount: furnitures.length,
             itemBuilder: (BuildContext context, int index) {
-              return OnClickWidget(
-                onClick: () {
-                  debugPrint("hiiii");
-                },
-                child: CommonVerticalProductComponent(
+              return CommonVerticalProductComponent(
                   furnitureModel: furnitures[index],
-                ),
-              );
+                );
             },
             separatorBuilder: (BuildContext context, int index) {
               return addHorizontalSpace(Dimens.spacing_16);
@@ -252,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<HomeViewModel>(builder: (context, viewModel, _) {
       switch(viewModel.latestFurnitureListUseCase.state){
         case ResponseState.LOADING:
-          return Container();
+          return const Center(child: CircularProgressIndicator());
         case ResponseState.COMPLETE:
           List<RoomModel> rooms = viewModel.homeRoomListUseCase.data ?? [];
           return _viewByRoomComponent(rooms);
