@@ -16,7 +16,7 @@ class CategoriesRemoteImpl implements CategoriesRemote {
   static final ApiClient _apiClient = locator<ApiClient>();
 
   @override
-  Future<List<CategoryModel>> getCategoryList() async {
+  Future<List<CategoryModel>>   getCategoryList() async {
     try {
       var result = await _apiClient.dio.get(ApiConstants.categories);
       var baseResponse = BaseListResponse<CategoryModel>.fromJson(

@@ -124,7 +124,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(Dimens.spacing_12),
-              child: Image.asset(
+              child: Image.network(
                 model.imageName,
                 fit: BoxFit.cover,
               ),
