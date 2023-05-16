@@ -49,8 +49,8 @@ class _CommonVerticalProductComponentState
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                        Image.asset(
-                            ImageConstants.IC_PLACEHOLDER,
+                        Image.network(
+                            widget.furnitureModel.imageNames,
                             width: Dimens.spacing_124,
                           ),
                     addVerticalSpace(Dimens.spacing_16),

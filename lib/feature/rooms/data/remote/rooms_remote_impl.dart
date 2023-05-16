@@ -6,12 +6,9 @@ import 'package:production_project/feature/rooms/data/remote/rooms_remote.dart';
 import 'package:production_project/feature/rooms/model/rooms_model.dart';
 import 'package:production_project/remote/api_constants.dart';
 import 'package:production_project/remote/dio/base_list_response.dart';
-import 'package:production_project/remote/dio/base_response.dart';
 import 'package:production_project/remote/errors.dart';
 import 'package:production_project/remote/http_client.dart';
 import 'package:production_project/remote/not_null_mapper.dart';
-import 'package:production_project/utils/image_constants.dart';
-import 'package:production_project/utils/strings.dart';
 
 class RoomsRemoteImpl implements RoomsRemote {
 

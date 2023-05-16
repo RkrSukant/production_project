@@ -13,6 +13,7 @@ import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
 import 'package:production_project/utils/navigator_drawer_component.dart';
+import 'package:production_project/utils/response_state.dart';
 import 'package:production_project/utils/strings.dart';
 import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/utils.dart';
@@ -36,25 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
     fetchData();
   }
 
-  void fetchData() {}
-
-  final List<FurnitureModel> furnitures = [
-  ];
-
-  final List<RoomModel> rooms = [
-    RoomModel(
-        id: 1,
-        title: Strings.livingRoom,
-        imageName: ImageConstants.IC_SORT_BY_ROOMS_LIVING_ROOM),
-    RoomModel(
-        id: 1,
-        title: Strings.diningRoom,
-        imageName: ImageConstants.IC_SORT_BY_ROOMS_DINING_ROOM),
-    RoomModel(
-        id: 1,
-        title: Strings.bedRoom,
-        imageName: ImageConstants.IC_SORT_BY_ROOMS_BED_ROOM),
-  ];
+  void fetchData() {
+    Future.wait([
+      viewModel.getFeaturedProducts(),
+      viewModel.getLatestProducts(),
+      viewModel.getRoomList()
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: text_7b44c0_14_Medium_w600,
                   ),
                   addVerticalSpace(Dimens.spacing_16),
-                  // Test2(),
-                  _viewByRoomComponent(rooms),
+                  _observeRoomListResponse(),
                   addVerticalSpace(18),
                 ],
               ),
@@ -127,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: AppColors.black_rgba_1f2024,
           ),
           onPressed: () {
-            Scaffold.of(context).openDrawer();//todo cxheck
+            Scaffold.of(context).openDrawer(); //todo cxheck
           },
         );
       }),
@@ -137,7 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _searchTextFieldComponent() {
     return TextFormField(
       onTap: () {
-        Navigator.push(context, AnimScaleTransition(page: const SearchScreen()));
+        Navigator.push(
+            context, AnimScaleTransition(page: const SearchScreen()));
       },
       readOnly: true,
       style: text_1f2024_14_Regular_w400,
@@ -182,7 +171,27 @@ class _HomeScreenState extends State<HomeScreen> {
       case Strings.featuredProducts:
         return SizedBox(
           height: 270,
-          child: ListView.separated(
+          child: _observeFeaturedProducts(),
+        );
+      case Strings.ourNewReleases:
+        return SizedBox(
+          height: 270,
+          child: _observeLatestProducts(),
+        );
+      default:
+        return Container();
+    }
+  }
+
+  Widget _observeFeaturedProducts() {
+    return Consumer<HomeViewModel>(builder: (context, viewModel, _) {
+      switch (viewModel.featuredFurnitureListUseCase.state) {
+        case ResponseState.LOADING:
+          return Container();
+        case ResponseState.COMPLETE:
+          List<FurnitureModel> furnitures =
+              viewModel.featuredFurnitureListUseCase.data ?? [];
+          return ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: furnitures.length,
@@ -194,12 +203,24 @@ class _HomeScreenState extends State<HomeScreen> {
             separatorBuilder: (BuildContext context, int index) {
               return addHorizontalSpace(Dimens.spacing_16);
             },
-          ),
-        );
-      case Strings.ourNewReleases:
-        return SizedBox(
-          height: 270,
-          child: ListView.separated(
+          );
+        case ResponseState.ERROR:
+          return const Center(child: Text(Strings.something_went_wrong));
+        default:
+          return Container();
+      }
+    });
+  }
+
+  Widget _observeLatestProducts() {
+    return Consumer<HomeViewModel>(builder: (context, viewModel, _) {
+      switch(viewModel.latestFurnitureListUseCase.state){
+        case ResponseState.LOADING:
+          return Container();
+        case ResponseState.COMPLETE:
+          List<FurnitureModel> furnitures =
+              viewModel.featuredFurnitureListUseCase.data ?? [];
+          return ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: furnitures.length,
@@ -216,11 +237,31 @@ class _HomeScreenState extends State<HomeScreen> {
             separatorBuilder: (BuildContext context, int index) {
               return addHorizontalSpace(Dimens.spacing_16);
             },
-          ),
-        );
-      default:
-        return Container();
-    }
+          );
+        case ResponseState.ERROR:
+          return const Center(child: Text(Strings.something_went_wrong));
+        default:
+          return Container();
+      }
+    });
+
+
+  }
+
+  Widget _observeRoomListResponse() {
+    return Consumer<HomeViewModel>(builder: (context, viewModel, _) {
+      switch(viewModel.latestFurnitureListUseCase.state){
+        case ResponseState.LOADING:
+          return Container();
+        case ResponseState.COMPLETE:
+          List<RoomModel> rooms = viewModel.homeRoomListUseCase.data ?? [];
+          return _viewByRoomComponent(rooms);
+        case ResponseState.ERROR:
+          return const Center(child: Text(Strings.something_went_wrong));
+        default:
+          return Container();
+      }
+    });
   }
 
   Widget _viewByRoomComponent(List<RoomModel> roomList) {
@@ -247,8 +288,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _roomGridComponent(RoomModel model) {
     return OnClickWidget(
       onClick: () {
-        Navigator.push(
-            context, AnimScaleTransition(page: RoomResultScreen(roomName: model.title)));
+        Navigator.push(context,
+            AnimScaleTransition(page: RoomResultScreen(roomName: model.title)));
       },
       child: Card(
         child: Stack(
@@ -256,7 +297,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(Dimens.spacing_12),
-              child: Image.asset(
+              child: Image.network(
                 model.imageName,
                 fit: BoxFit.cover,
               ),
