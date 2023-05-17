@@ -146,7 +146,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 return;
               }
               for (var furniture in furnitures) {
-                if (furniture.title.toLowerCase().contains(searchValue.toLowerCase())) {
+                if ((furniture.title ?? '').toLowerCase().contains(searchValue.toLowerCase())) {
                   tempFurnitureList.add(furniture);
                 }
               }

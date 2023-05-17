@@ -10,25 +10,25 @@ class FurnitureModel{
   int id;
 
   @JsonKey(name: 'furniture_name')
-  String title;
+  String? title;
 
   @JsonKey(name: 'category_name')
-  String category;
+  String? category;
 
   @JsonKey(name: 'price')
-  double price;
+  double? price;
 
   @JsonKey(name: 'description')
-  String desc;
+  String? desc;
 
   @JsonKey(name: 'room_name')
-  String room;
+  String? room;
 
   @JsonKey(name: 'image')
-  String imageNames;
+  String? imageNames;
 
   @JsonKey(name:'ar_model')
-  String arObj;
+  String? arObj;
 
   FurnitureModel({required this.id, required this.title, required this.category, required this.price, required this.desc, required this.room, required this.imageNames, required this.arObj});
 
