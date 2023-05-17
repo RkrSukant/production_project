@@ -31,12 +31,12 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    fetchData("");
+    fetchData();
     searchResultVisible = false;
   }
 
-  void fetchData(String searchText) async {
-    var response = await viewModel.getFurnitureList();
+  void fetchData() async {
+    Future.wait([viewModel.getFurnitureList()]);
   }
 
   @override
