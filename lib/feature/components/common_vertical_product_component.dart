@@ -26,8 +26,13 @@ class _CommonVerticalProductComponentState
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Navigator.push(context, AnimScaleTransition(page: ProductDetailScreen(product: widget.furnitureModel,)));
+      onTap: () {
+        Navigator.push(
+            context,
+            AnimScaleTransition(
+                page: ProductDetailScreen(
+              product: widget.furnitureModel,
+            )));
       },
       child: Card(
         elevation: 0,
@@ -39,7 +44,11 @@ class _CommonVerticalProductComponentState
         ),
         child: OnClickWidget(
             onClick: () {
-              Navigator.push(context, AnimScaleTransition(page: ProductDetailScreen(product: widget.furnitureModel)));
+              Navigator.push(
+                  context,
+                  AnimScaleTransition(
+                      page:
+                          ProductDetailScreen(product: widget.furnitureModel)));
             },
             child: Padding(
               padding: const EdgeInsets.all(Dimens.spacing_16),
@@ -49,10 +58,11 @@ class _CommonVerticalProductComponentState
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                        Image.network(
-                            widget.furnitureModel.imageNames,
-                            width: Dimens.spacing_124,
-                          ),
+                    FadeInImage.assetNetwork(
+                      width: Dimens.spacing_124,
+                      placeholder: ImageConstants.IC_PLACEHOLDER,
+                      image: widget.furnitureModel.imageNames,
+                    ),
                     addVerticalSpace(Dimens.spacing_16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,9 +88,7 @@ class _CommonVerticalProductComponentState
                     ),
                     addVerticalSpace(Dimens.spacing_16),
                     Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                          children: [
+                      child: Row(mainAxisSize: MainAxisSize.min, children: [
                         const Text(
                           Strings.nRs,
                           style: text_7b44c0_10_bold_w600,

@@ -291,9 +291,11 @@ class _HomeScreenState extends State<HomeScreen> {
           fit: StackFit.expand,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(Dimens.spacing_12),
-              child: Image.network(
-                model.imageName,
+              borderRadius: BorderRadius.circular(Dimens.spacing_8),
+              child: FadeInImage.assetNetwork(
+                placeholder: ImageConstants.IC_LOADING,
+                placeholderFit: BoxFit.fitHeight,
+                image: model.imageName,
                 fit: BoxFit.cover,
               ),
             ),

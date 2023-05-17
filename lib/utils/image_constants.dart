@@ -22,4 +22,6 @@ class ImageConstants {
   static const String IC_SORT_BY_ROOMS_DINING_ROOM = "assets/images/sort_by_rooms/diningRoom.png";
   static const String IC_SORT_BY_ROOMS_LIVING_ROOM = "assets/images/sort_by_rooms/livingRoom.png";
   static const String IC_SORT_BY_ROOMS_OUTDOORS = "assets/images/sort_by_rooms/outdoors.png";
+  static const String IC_LOADING= "assets/images/loading.png";
+
 }

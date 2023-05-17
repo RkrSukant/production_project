@@ -73,7 +73,6 @@ class _RoomResultScreenState extends State<RoomResultScreen> {
   }
 
   Widget _observeRoomResultResponse() {
-    debugPrint("Here");
     return Consumer<RoomsViewModel>(builder: (context, viewModel, _) {
       switch (viewModel.roomFurnitureListUseCase.state) {
         case ResponseState.LOADING:
