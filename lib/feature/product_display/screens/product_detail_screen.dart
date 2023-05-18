@@ -84,12 +84,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _productDetailImageWidget(product.imageNames),
+              _productDetailImageWidget(product.imageNames?? ImageConstants.IC_PLACEHOLDER),
               addVerticalSpace(Dimens.spacing_24),
               _getARViewButton(context, product),
               addVerticalSpace(Dimens.spacing_16),
               Text(
-                product.title,
+                product.title ?? "N/A",
                 style: text_1f2024_30_Bold_w800,
               ),
               addVerticalSpace(Dimens.spacing_16),
@@ -164,11 +164,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 context,
                 AnimScaleTransition(
                     page: CategoryResultScreen(
-                  categoryName: product.category,
+                  categoryName: product.category  ?? "N/A",
                 )));
           },
           child: Text(
-            product.category,
+            product.category  ?? "N/A",
             style: text_7b44c0_16_Regular_w500_underline,
           ),
         )
@@ -209,7 +209,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           addVerticalSpace(Dimens.spacing_6),
           Text(
-            product.desc,
+            product.desc  ?? "N/A",
             style: text_71727a_14_Light_w300,
           )
         ],

@@ -61,7 +61,7 @@ class _CommonVerticalProductComponentState
                     FadeInImage.assetNetwork(
                       width: Dimens.spacing_124,
                       placeholder: ImageConstants.IC_PLACEHOLDER,
-                      image: widget.furnitureModel.imageNames,
+                      image: widget.furnitureModel.imageNames ?? ImageConstants.IC_PLACEHOLDER,
                     ),
                     addVerticalSpace(Dimens.spacing_16),
                     Column(
@@ -69,17 +69,17 @@ class _CommonVerticalProductComponentState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          widget.furnitureModel.title,
+                          widget.furnitureModel.title ?? "N/A",
                           style: text_2f3036_14_Bold_w700,
                         ),
                         addVerticalSpace(Dimens.spacing_4),
                         Text(
-                          widget.furnitureModel.category,
+                          widget.furnitureModel.category ?? "N/A",
                           style: text_7b44c0_8_regular_w400,
                         ),
                         addVerticalSpace(Dimens.spacing_4),
                         Text(
-                          widget.furnitureModel.desc,
+                          widget.furnitureModel.desc ?? "",
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: text_71727a_8_Regular_w400,
