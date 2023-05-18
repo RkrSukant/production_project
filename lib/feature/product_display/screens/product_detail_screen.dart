@@ -130,7 +130,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               borderRadius: BorderRadius.circular(Dimens.spacing_12),
             )),
         onPressed: () {
-          showToast("To AR Screen", true);
+          if(product.arObj?.isEmpty ?? true){
+            showToast(Strings.ar_view_unavailable, false);
+          }else{
+            //todo go to ar view
+          }
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
