@@ -85,7 +85,6 @@ flutter:
     - assets/images/
     - assets/images/sort_by_rooms/
     - assets/images/categories/
-    - assets/models/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

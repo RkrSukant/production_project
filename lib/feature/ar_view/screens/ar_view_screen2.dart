@@ -99,12 +99,13 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
       arObjectManager.removeNode(webObjectNode!);
       webObjectNode = null;
     } else {
+      double scale =0.2;
       var newNode = ARNode(
           type: NodeType.webGLB,
           uri:
               // "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
               "https://firebasestorage.googleapis.com/v0/b/furnihome-production-project.appspot.com/o/chair.glb?alt=media&token=ad29460d-9306-4d0c-8c78-ebe8a71fb510",
-          scale: Vector3(0.2, 0.2, 0.2));
+          scale: Vector3(scale, scale, scale));
       bool? didAddWebNode = await arObjectManager.addNode(newNode);
       webObjectNode = (didAddWebNode!) ? newNode : null;
     }
