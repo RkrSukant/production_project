@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/di/service_locator.dart';
+import 'package:production_project/feature/ar_view/screens/ar_view_screen.dart';
+import 'package:production_project/feature/ar_view/screens/ar_view_screen2.dart';
 import 'package:production_project/feature/categories/screens/categories_screen.dart';
 import 'package:production_project/feature/components/common_vertical_product_component.dart';
 import 'package:production_project/feature/home/screens/home_viewmodel.dart';
@@ -63,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   _searchTextFieldComponent(),
                   addVerticalSpace(Dimens.spacing_16),
-                  _bannerComponent(ImageConstants.IC_Banner_1),
+                  OnClickWidget(onClick:(){Navigator.push(context, AnimScaleTransition(page: ARViewScreen2()));},child: _bannerComponent(ImageConstants.IC_Banner_1)),
                   addVerticalSpace(Dimens.spacing_24),
                   const Text(
                     Strings.featuredProducts,

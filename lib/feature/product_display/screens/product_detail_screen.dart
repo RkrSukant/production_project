@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/di/service_locator.dart';
+import 'package:production_project/feature/ar_view/screens/ar_view_screen.dart';
 import 'package:production_project/feature/categories/screens/category_result_screen.dart';
 import 'package:production_project/feature/product_display/screens/product_detail_viewmodel.dart';
 import 'package:production_project/utils/colors.dart';
@@ -133,7 +134,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           if(product.arObj?.isEmpty ?? true){
             showToast(Strings.ar_view_unavailable, false);
           }else{
-            //todo go to ar view
+            Navigator.push(context, AnimScaleTransition(page: const ARViewScreen()));
           }
         },
         child: Row(
