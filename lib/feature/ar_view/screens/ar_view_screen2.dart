@@ -1,9 +1,11 @@
 import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
+import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
 import 'package:ar_flutter_plugin/datatypes/node_types.dart';
 import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
+import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/widgets/ar_view.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ import 'package:production_project/feature/ar_view/screens/Examples/plane_exampl
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
+import 'package:production_project/utils/strings.dart';
 import 'package:production_project/utils/utils.dart';
 import 'package:vector_math/vector_math_64.dart';
 import 'package:flutter/gestures.dart';
@@ -30,10 +33,13 @@ class ARViewScreen2 extends StatefulWidget {
 class _ARViewScreen2State extends State<ARViewScreen2> {
   ARSessionManager? arSessionManager;
   ARObjectManager? arObjectManager;
+  ARAnchorManager? arAnchorManager;
+  double scale = 1;
+
+  List<ARNode> nodes = [];
+  List<ARAnchor> anchors = [];
 
   ARNode? objectNode;
-
-  Offset? _initialTouchPosition;
 
   @override
   void dispose() {
@@ -51,21 +57,21 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
             onARViewCreated: _onArViewCreated,
             planeDetectionConfig: PlaneDetectionConfig.horizontal,
           ),
-          OnClickWidget(
-              onClick: () {
-                onWebObjectAtButtonPressed();
-                // Navigator.push(context, AnimScaleTransition(page: LocalWebExample())); //todo remove example
-                // Navigator.push(context, AnimScaleTransition(page: PlaneArExample())); //todo remove example
-              },
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: AppColors.purple_rgba_7b44c0,
-                  height: 50,
-                  width: 100,
-                  child: Text("Add Object"),
-                ),
-              ))
+          // OnClickWidget(
+          //     onClick: () {
+          //       onWebObjectAtButtonPressed();
+          //       // Navigator.push(context, AnimScaleTransition(page: LocalWebExample())); //todo remove example
+          //       // Navigator.push(context, AnimScaleTransition(page: PlaneArExample())); //todo remove example
+          //     },
+          //     child: Align(
+          //       alignment: Alignment.bottomCenter,
+          //       child: Container(
+          //         color: AppColors.purple_rgba_7b44c0,
+          //         height: 50,
+          //         width: 100,
+          //         child: Text("Add Object"),
+          //       ),
+          //     ))
         ],
       ),
     );
@@ -98,13 +104,71 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
       ARLocationManager arLocationManger) {
     this.arSessionManager = arSessionManager;
     this.arObjectManager = arObjectManager;
+    this.arAnchorManager = arAnchorManager;
     this.arSessionManager?.onInitialize(
           showFeaturePoints: false,
           showPlanes: true,
-          showWorldOrigin: true,
-          handleTaps: false,
         );
     this.arObjectManager?.onInitialize();
+    this.arSessionManager?.onPlaneOrPointTap = onPlaneTapped;
+    this.arObjectManager!.onNodeTap = onNodeTapped;
+    showToastInfo(Strings.place_object_toast);
+  }
+
+  Future<void> onPlaneTapped(List<ARHitTestResult> hitTestResults) async {
+    var singleHitTestResult = hitTestResults.firstWhere(
+        (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane);
+    if (singleHitTestResult != null) {
+      var newAnchor =
+      ARPlaneAnchor(transformation: singleHitTestResult.worldTransform);
+      bool? didAddAnchor = await this.arAnchorManager!.addAnchor(newAnchor);
+      if (didAddAnchor!) {
+        this.anchors.add(newAnchor);
+        // Add note to anchor
+        var newNode = ARNode(
+            type: NodeType.webGLB,
+            uri:
+            "https://firebasestorage.googleapis.com/v0/b/furnihome-production-project.appspot.com/o/chair.glb?alt=media&token=ad29460d-9306-4d0c-8c78-ebe8a71fb510",
+            scale: Vector3(scale,scale,scale),
+            position: Vector3(0.0, 0.0, 0.0),
+            rotation: Vector4(1.0, 0.0, 0.0, 0.0));
+        bool? didAddNodeToAnchor =
+        await this.arObjectManager!.addNode(newNode, planeAnchor: newAnchor);
+        if (didAddNodeToAnchor!) {
+          this.nodes.add(newNode);
+        } else {
+          this.arSessionManager!.onError("Adding Node to Anchor failed");
+        }
+      } else {
+        this.arSessionManager!.onError("Adding Anchor failed");
+      }
+      /*
+      // To add a node to the tapped position without creating an anchor, use the following code (Please mind: the function onRemoveEverything has to be adapted accordingly!):
+      var newNode = ARNode(
+          type: NodeType.localGLTF2,
+          uri: "Models/Chicken_01/Chicken_01.gltf",
+          scale: Vector3(0.2, 0.2, 0.2),
+          transformation: singleHitTestResult.worldTransform);
+      bool didAddWebNode = await this.arObjectManager.addNode(newNode);
+      if (didAddWebNode) {
+        this.nodes.add(newNode);
+      }*/
+    }
+  }
+
+  Future<void> onNodeTapped(List<String> nodes) async {
+    var number = nodes.length;
+    this.arSessionManager!.onError("Tapped $number node(s)");
+  }
+
+  Future<void> onRemoveEverything() async {
+    /*nodes.forEach((node) {
+      this.arObjectManager.removeNode(node);
+    });*/
+    anchors.forEach((anchor) {
+      this.arAnchorManager!.removeAnchor(anchor);
+    });
+    anchors = [];
   }
 
   Future<void> onWebObjectAtButtonPressed() async {
@@ -112,7 +176,6 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
       arObjectManager?.removeNode(objectNode!);
       objectNode = null;
     } else {
-      double scale =1;
       var newNode = ARNode(
           type: NodeType.webGLB,
           position: Vector3(0.0, -1, -1.5),
