@@ -37,3 +37,13 @@ void showToastInfo(String title) {
       textColor: AppColors.white_rgba_ffffff,
       fontSize: 16);
 }
+
+void showToastInfoShort(String title) {
+  Fluttertoast.showToast(
+      msg: title,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 3,
+      textColor: AppColors.white_rgba_ffffff,
+      fontSize: 16);
+}

@@ -28,6 +28,9 @@ class Strings {
   static const String something_went_wrong = 'Something went wrong';
   static const String search_result_for = 'Search Results for:';
   static const String no_data = 'No Data';
+  static const String loading_ar_object = 'Loading AR Object';
+  static const String moving_object = 'Moving AR Object, use two fingers to rotate';
+  static const String rotating_object = 'Rotating AR Object, use one fingers to move';
   static const String place_object_toast = 'Tap on plane where you want to place your object';
   static const String ar_view_unavailable = 'AR View Not Available';
   static const String image_placeholder_url = 'https://firebasestorage.googleapis.com/v0/b/furnihome-production-project.appspot.com/o/placeholder.jpg?alt=media&token=087e4d7a-bb66-4175-82a1-7a1c17955970';

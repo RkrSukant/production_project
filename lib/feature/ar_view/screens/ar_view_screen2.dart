@@ -5,23 +5,17 @@ import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
+import 'package:ar_flutter_plugin/models/ar_anchor.dart';
 import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/widgets/ar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:production_project/anim/anim_scale_transition.dart';
-import 'package:production_project/feature/ar_view/screens/Examples/local_web_example.dart';
-import 'package:production_project/feature/ar_view/screens/Examples/plane_example.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
 import 'package:production_project/utils/strings.dart';
 import 'package:production_project/utils/utils.dart';
 import 'package:vector_math/vector_math_64.dart';
-import 'package:flutter/gestures.dart';
-import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
-import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
-import 'package:ar_flutter_plugin/models/ar_anchor.dart';
 
 class ARViewScreen2 extends StatefulWidget {
   const ARViewScreen2({Key? key}) : super(key: key);
@@ -58,22 +52,6 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
             onARViewCreated: _onArViewCreated,
             planeDetectionConfig: PlaneDetectionConfig.horizontal,
           ),
-          // Align(
-          //   alignment: Alignment.bottomCenter,
-          //   child: OnClickWidget(
-          //     onClick: () {
-          //       onWebObjectAtButtonPressed();
-          //       // Navigator.push(context, AnimScaleTransition(page: LocalWebExample())); //todo remove example
-          //       // Navigator.push(context, AnimScaleTransition(page: PlaneArExample())); //todo remove example
-          //     },
-          //     child: Container(
-          //       color: AppColors.purple_rgba_7b44c0,
-          //       height: 50,
-          //       width: 100,
-          //       child: const Text("Add Object"),
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );
@@ -110,14 +88,22 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
     this.arSessionManager?.onInitialize(
           showFeaturePoints: false,
           showPlanes: true,
+          handlePans: true,
+          handleRotation: true,
         );
     this.arObjectManager?.onInitialize();
     this.arSessionManager?.onPlaneOrPointTap = onPlaneTapped;
-    this.arObjectManager!.onNodeTap = onNodeTapped;
+    this.arObjectManager!.onPanStart = onPanStarted;
+    this.arObjectManager!.onPanChange = onPanChanged;
+    this.arObjectManager!.onPanEnd = onPanEnded;
+    this.arObjectManager!.onRotationStart = onRotationStarted;
+    this.arObjectManager!.onRotationChange = onRotationChanged;
+    this.arObjectManager!.onRotationEnd = onRotationEnded;
     showToastInfo(Strings.place_object_toast);
   }
 
   Future<void> onPlaneTapped(List<ARHitTestResult> hitTestResults) async {
+    showToastInfo(Strings.loading_ar_object);
     var singleHitTestResult = hitTestResults.firstWhere(
         (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane);
     var newAnchor =
@@ -145,28 +131,35 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
     }
   }
 
-  Future<void> onNodeTapped(List<String> nodes) async {
-    var number = nodes.length;
-    arSessionManager!.onError("Tapped $number node(s)");
+  onPanStarted(String nodeName) {
+    debugPrint("Started panning node $nodeName");
+    showToastInfoShort(Strings.moving_object);
+  }
+
+  onPanChanged(String nodeName) {
+    debugPrint("Continued panning node $nodeName");
+  }
+
+  onPanEnded(String nodeName, Matrix4 newTransform) {
+    debugPrint("Ended panning node $nodeName");
+    final pannedNode = nodes?.name == nodeName;
+  }
+
+  onRotationStarted(String nodeName) {
+    debugPrint("Started rotating node $nodeName");
+    showToastInfoShort(Strings.rotating_object);
+  }
+
+  onRotationChanged(String nodeName) {
+    debugPrint("Continued rotating node $nodeName");
+  }
+
+  onRotationEnded(String nodeName, Matrix4 newTransform) {
+    debugPrint("Ended rotating node $nodeName");
+    final rotatedNode = nodes?.name == nodeName;
   }
 
   Future<void> onRemoveEverything() async {
     arAnchorManager?.removeAnchor(anchors!);
-  }
-
-  Future<void> onWebObjectAtButtonPressed() async {
-    if (objectNode != null) {
-      arObjectManager?.removeNode(objectNode!);
-      objectNode = null;
-    } else {
-      var newNode = ARNode(
-          type: NodeType.webGLB,
-          position: Vector3(0.0, -1, -1.5),
-          uri:
-              "https://firebasestorage.googleapis.com/v0/b/furnihome-production-project.appspot.com/o/chair.glb?alt=media&token=ad29460d-9306-4d0c-8c78-ebe8a71fb510",
-          scale: Vector3(scale, scale, scale));
-      bool? didAddWebNode = await arObjectManager?.addNode(newNode);
-      objectNode = (didAddWebNode!) ? newNode : null;
-    }
   }
 }
