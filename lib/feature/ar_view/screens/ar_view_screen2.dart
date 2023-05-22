@@ -36,8 +36,9 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
   ARAnchorManager? arAnchorManager;
   double scale = 1;
 
-  List<ARNode> nodes = [];
-  List<ARAnchor> anchors = [];
+  ARNode? nodes;
+
+  ARAnchor? anchors;
 
   ARNode? objectNode;
 
@@ -57,21 +58,22 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
             onARViewCreated: _onArViewCreated,
             planeDetectionConfig: PlaneDetectionConfig.horizontal,
           ),
-          // OnClickWidget(
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: OnClickWidget(
           //     onClick: () {
           //       onWebObjectAtButtonPressed();
           //       // Navigator.push(context, AnimScaleTransition(page: LocalWebExample())); //todo remove example
           //       // Navigator.push(context, AnimScaleTransition(page: PlaneArExample())); //todo remove example
           //     },
-          //     child: Align(
-          //       alignment: Alignment.bottomCenter,
-          //       child: Container(
-          //         color: AppColors.purple_rgba_7b44c0,
-          //         height: 50,
-          //         width: 100,
-          //         child: Text("Add Object"),
-          //       ),
-          //     ))
+          //     child: Container(
+          //       color: AppColors.purple_rgba_7b44c0,
+          //       height: 50,
+          //       width: 100,
+          //       child: const Text("Add Object"),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
@@ -118,57 +120,38 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
   Future<void> onPlaneTapped(List<ARHitTestResult> hitTestResults) async {
     var singleHitTestResult = hitTestResults.firstWhere(
         (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane);
-    if (singleHitTestResult != null) {
-      var newAnchor =
-      ARPlaneAnchor(transformation: singleHitTestResult.worldTransform);
-      bool? didAddAnchor = await this.arAnchorManager!.addAnchor(newAnchor);
-      if (didAddAnchor!) {
-        this.anchors.add(newAnchor);
-        // Add note to anchor
-        var newNode = ARNode(
-            type: NodeType.webGLB,
-            uri:
-            "https://firebasestorage.googleapis.com/v0/b/furnihome-production-project.appspot.com/o/chair.glb?alt=media&token=ad29460d-9306-4d0c-8c78-ebe8a71fb510",
-            scale: Vector3(scale,scale,scale),
-            position: Vector3(0.0, 0.0, 0.0),
-            rotation: Vector4(1.0, 0.0, 0.0, 0.0));
-        bool? didAddNodeToAnchor =
-        await this.arObjectManager!.addNode(newNode, planeAnchor: newAnchor);
-        if (didAddNodeToAnchor!) {
-          this.nodes.add(newNode);
-        } else {
-          this.arSessionManager!.onError("Adding Node to Anchor failed");
-        }
-      } else {
-        this.arSessionManager!.onError("Adding Anchor failed");
-      }
-      /*
-      // To add a node to the tapped position without creating an anchor, use the following code (Please mind: the function onRemoveEverything has to be adapted accordingly!):
+    var newAnchor =
+        ARPlaneAnchor(transformation: singleHitTestResult.worldTransform);
+    bool? didAddAnchor = await arAnchorManager!.addAnchor(newAnchor);
+    if (didAddAnchor!) {
+      anchors = newAnchor;
+      // Add note to anchor
       var newNode = ARNode(
-          type: NodeType.localGLTF2,
-          uri: "Models/Chicken_01/Chicken_01.gltf",
-          scale: Vector3(0.2, 0.2, 0.2),
-          transformation: singleHitTestResult.worldTransform);
-      bool didAddWebNode = await this.arObjectManager.addNode(newNode);
-      if (didAddWebNode) {
-        this.nodes.add(newNode);
-      }*/
+          type: NodeType.webGLB,
+          uri:
+              "https://firebasestorage.googleapis.com/v0/b/furnihome-production-project.appspot.com/o/chair.glb?alt=media&token=ad29460d-9306-4d0c-8c78-ebe8a71fb510",
+          scale: Vector3(scale, scale, scale),
+          position: Vector3(0.0, 0.0, 0.0),
+          rotation: Vector4(1.0, 0.0, 0.0, 0.0));
+      bool? didAddNodeToAnchor =
+          await arObjectManager!.addNode(newNode, planeAnchor: newAnchor);
+      if (didAddNodeToAnchor!) {
+        nodes = newNode;
+      } else {
+        arSessionManager!.onError("Adding Node to Anchor failed");
+      }
+    } else {
+      arSessionManager!.onError("Adding Anchor failed");
     }
   }
 
   Future<void> onNodeTapped(List<String> nodes) async {
     var number = nodes.length;
-    this.arSessionManager!.onError("Tapped $number node(s)");
+    arSessionManager!.onError("Tapped $number node(s)");
   }
 
   Future<void> onRemoveEverything() async {
-    /*nodes.forEach((node) {
-      this.arObjectManager.removeNode(node);
-    });*/
-    anchors.forEach((anchor) {
-      this.arAnchorManager!.removeAnchor(anchor);
-    });
-    anchors = [];
+    arAnchorManager?.removeAnchor(anchors!);
   }
 
   Future<void> onWebObjectAtButtonPressed() async {
@@ -182,7 +165,6 @@ class _ARViewScreen2State extends State<ARViewScreen2> {
           uri:
               "https://firebasestorage.googleapis.com/v0/b/furnihome-production-project.appspot.com/o/chair.glb?alt=media&token=ad29460d-9306-4d0c-8c78-ebe8a71fb510",
           scale: Vector3(scale, scale, scale));
-
       bool? didAddWebNode = await arObjectManager?.addNode(newNode);
       objectNode = (didAddWebNode!) ? newNode : null;
     }
