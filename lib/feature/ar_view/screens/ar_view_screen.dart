@@ -64,7 +64,9 @@ class _ARViewScreenState extends State<ARViewScreen> {
                 color: AppColors.purple_rgba_7b44c0,
               ),
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   color: AppColors.white_rgba_ffffff,
                   icon: const Icon(Icons.arrow_back_ios_new)),
             ),
