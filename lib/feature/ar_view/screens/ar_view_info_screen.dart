@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
+import 'package:production_project/utils/strings.dart';
+import 'package:production_project/utils/text_styles.dart';
 
 class ARViewInfoScreen extends StatefulWidget {
   const ARViewInfoScreen({Key? key}) : super(key: key);
@@ -24,22 +26,32 @@ class _ARViewInfoScreenState extends State<ARViewInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _appBar(context),
-        body: Stack(children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: ElevatedButton(
-              onPressed: () async {},
-              child: const Text("Add Object"),
+        appBar: _appBar(),
+        body: Container(
+          color: const AppColors().backGroundColor,
+          child: Padding(
+            padding: const EdgeInsets.all(Dimens.spacing_16),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container()
+                ],
+              ),
             ),
-          )
-        ]));
+          ),
+        ),
+    );
   }
 
-  AppBar _appBar(BuildContext context) {
+  AppBar _appBar() {
     return AppBar(
+      centerTitle: true,
       backgroundColor: AppColors.white_rbga_ffffff,
       elevation: 0,
+      title: const Text(
+        Strings.ar_view_info,
+        style: text_1f2024_14_Bold_w800,
+      ),
       leading: Builder(builder: (context) {
         return IconButton(
           icon: Image.asset(

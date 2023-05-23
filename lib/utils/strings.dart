@@ -37,5 +37,6 @@ class Strings {
   static const String image_saved = 'Image saved';
   static const String storage_permission_not_granted = 'Storage Permission Not Granted';
   static const String back = 'Back';
+  static const String ar_view_info = 'AR View Info';
 
 }
