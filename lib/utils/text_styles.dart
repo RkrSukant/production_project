@@ -97,3 +97,13 @@ const TextStyle text_1F2024_16_Regular_w400 = TextStyle(
     color: AppColors.black_rgba_1F2024,
     fontWeight: FontWeight.w500,
     fontSize: Dimens.text_size_16);
+
+const TextStyle text_ar_info_header = TextStyle(
+    color: AppColors.black_rgba_1F2024,
+    fontWeight: FontWeight.w600,
+    fontSize: Dimens.text_size_20);
+
+const TextStyle text_ar_info_detail = TextStyle(
+    color: AppColors.grey_rgba_71727a,
+    fontWeight: FontWeight.w400,
+    fontSize: Dimens.text_size_14);

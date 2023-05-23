@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/categories/screens/categories_screen.dart';
 import 'package:production_project/feature/components/common_vertical_product_component.dart';
 import 'package:production_project/feature/home/screens/home_viewmodel.dart';
 import 'package:production_project/feature/rooms/model/rooms_model.dart';
 import 'package:production_project/feature/rooms/screens/room_result_screen.dart';
-import 'package:production_project/feature/rooms/screens/rooms_screen.dart';
 import 'package:production_project/feature/search/screens/search_screen.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
@@ -115,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: AppColors.black_rgba_1f2024,
           ),
           onPressed: () {
-            Scaffold.of(context).openDrawer(); //todo cxheck
+            Scaffold.of(context).openDrawer();
           },
         );
       }),
@@ -214,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _observeLatestProducts() {
     return Consumer<HomeViewModel>(builder: (context, viewModel, _) {
-      switch(viewModel.latestFurnitureListUseCase.state){
+      switch (viewModel.latestFurnitureListUseCase.state) {
         case ResponseState.LOADING:
           return const Center(child: CircularProgressIndicator());
         case ResponseState.COMPLETE:
@@ -226,8 +224,8 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: furnitures.length,
             itemBuilder: (BuildContext context, int index) {
               return CommonVerticalProductComponent(
-                  furnitureModel: furnitures[index],
-                );
+                furnitureModel: furnitures[index],
+              );
             },
             separatorBuilder: (BuildContext context, int index) {
               return addHorizontalSpace(Dimens.spacing_16);
@@ -239,13 +237,11 @@ class _HomeScreenState extends State<HomeScreen> {
           return Container();
       }
     });
-
-
   }
 
   Widget _observeRoomListResponse() {
     return Consumer<HomeViewModel>(builder: (context, viewModel, _) {
-      switch(viewModel.latestFurnitureListUseCase.state){
+      switch (viewModel.latestFurnitureListUseCase.state) {
         case ResponseState.LOADING:
           return const Center(child: CircularProgressIndicator());
         case ResponseState.COMPLETE:

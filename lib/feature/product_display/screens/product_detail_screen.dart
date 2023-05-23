@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/di/service_locator.dart';
+import 'package:production_project/feature/ar_view/screens/ar_view_screen.dart';
 import 'package:production_project/feature/categories/screens/category_result_screen.dart';
 import 'package:production_project/feature/product_display/screens/product_detail_viewmodel.dart';
 import 'package:production_project/utils/colors.dart';
@@ -84,7 +85,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _productDetailImageWidget(product.imageNames?? ImageConstants.IC_PLACEHOLDER),
+              _productDetailImageWidget(
+                  product.imageNames ?? ImageConstants.IC_PLACEHOLDER),
               addVerticalSpace(Dimens.spacing_24),
               _getARViewButton(context, product),
               addVerticalSpace(Dimens.spacing_16),
@@ -130,10 +132,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               borderRadius: BorderRadius.circular(Dimens.spacing_12),
             )),
         onPressed: () {
-          if(product.arObj?.isEmpty ?? true){
+          if (product.arObj?.isEmpty ?? true) {
             showToast(Strings.ar_view_unavailable, false);
-          }else{
-            //todo go to ar view
+          } else {
+            Navigator.push(
+                context,
+                AnimScaleTransition(
+                    page: ARViewScreen(
+                  furnitureModel: widget.product,
+                )));
           }
         },
         child: Row(
@@ -168,11 +175,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 context,
                 AnimScaleTransition(
                     page: CategoryResultScreen(
-                  categoryName: product.category  ?? "N/A",
+                  categoryName: product.category ?? "N/A",
                 )));
           },
           child: Text(
-            product.category  ?? "N/A",
+            product.category ?? "N/A",
             style: text_7b44c0_16_Regular_w500_underline,
           ),
         )
@@ -213,7 +220,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           addVerticalSpace(Dimens.spacing_6),
           Text(
-            product.desc  ?? "N/A",
+            product.desc ?? "N/A",
             style: text_71727a_14_Light_w300,
           )
         ],
