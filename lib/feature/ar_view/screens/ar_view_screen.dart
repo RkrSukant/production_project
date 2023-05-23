@@ -13,17 +13,20 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:production_project/anim/anim_scale_transition.dart';
+import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/feature/ar_view/screens/ar_view_info_screen.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
-import 'package:production_project/utils/image_constants.dart';
 import 'package:production_project/utils/strings.dart';
 import 'package:production_project/utils/utils.dart';
 import 'package:production_project/utils/widget_functions.dart';
 import 'package:vector_math/vector_math_64.dart';
 
 class ARViewScreen extends StatefulWidget {
-  const ARViewScreen({Key? key}) : super(key: key);
+  final FurnitureModel furnitureModel;
+
+  const ARViewScreen({Key? key, required this.furnitureModel})
+      : super(key: key);
 
   @override
   State<ARViewScreen> createState() => _ARViewScreenState();
@@ -86,7 +89,9 @@ class _ARViewScreenState extends State<ARViewScreen> {
                   ),
                   child: IconButton(
                       iconSize: Dimens.spacing_32,
-                      onPressed: () {},
+                      onPressed: () {
+                        onInfoTapped();
+                      },
                       color: AppColors.white_rgba_ffffff,
                       icon: const Icon(Icons.info_outline)),
                 ),
@@ -123,26 +128,6 @@ class _ARViewScreenState extends State<ARViewScreen> {
           ),
         ),
       ],
-    );
-  }
-
-  AppBar _appBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: AppColors.white_rbga_ffffff,
-      elevation: 0,
-      leading: Builder(builder: (context) {
-        return IconButton(
-          icon: Image.asset(
-            ImageConstants.IC_BACK_ICON,
-            width: Dimens.spacing_20,
-            height: Dimens.spacing_20,
-            color: AppColors.black_rgba_1f2024,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        );
-      }),
     );
   }
 
@@ -183,7 +168,7 @@ class _ARViewScreenState extends State<ARViewScreen> {
       // Add note to anchor
       var newNode = ARNode(
           type: NodeType.webGLB,
-          uri:
+          uri: widget.furnitureModel.arObj ??
               "https://firebasestorage.googleapis.com/v0/b/furnihome-production-project.appspot.com/o/chair.glb?alt=media&token=ad29460d-9306-4d0c-8c78-ebe8a71fb510",
           scale: Vector3(scale, scale, scale),
           position: Vector3(0.0, 0.0, 0.0),
@@ -253,6 +238,7 @@ class _ARViewScreenState extends State<ARViewScreen> {
   }
 
   void onInfoTapped() {
+    Navigator.pop(context);
     Navigator.push(context, AnimScaleTransition(page: ARViewInfoScreen()));
   }
 }

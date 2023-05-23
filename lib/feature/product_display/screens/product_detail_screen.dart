@@ -136,7 +136,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             showToast(Strings.ar_view_unavailable, false);
           } else {
             Navigator.push(
-                context, AnimScaleTransition(page: const ARViewScreen()));
+                context,
+                AnimScaleTransition(
+                    page: ARViewScreen(
+                  furnitureModel: widget.product,
+                )));
           }
         },
         child: Row(
