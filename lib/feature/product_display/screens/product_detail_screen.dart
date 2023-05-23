@@ -85,7 +85,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _productDetailImageWidget(product.imageNames?? ImageConstants.IC_PLACEHOLDER),
+              _productDetailImageWidget(
+                  product.imageNames ?? ImageConstants.IC_PLACEHOLDER),
               addVerticalSpace(Dimens.spacing_24),
               _getARViewButton(context, product),
               addVerticalSpace(Dimens.spacing_16),
@@ -131,10 +132,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               borderRadius: BorderRadius.circular(Dimens.spacing_12),
             )),
         onPressed: () {
-          if(product.arObj?.isEmpty ?? true){
+          if (product.arObj?.isEmpty ?? true) {
             showToast(Strings.ar_view_unavailable, false);
-          }else{
-            Navigator.push(context, AnimScaleTransition(page: const ARViewScreen()));
+          } else {
+            Navigator.push(
+                context, AnimScaleTransition(page: const ARViewScreen()));
           }
         },
         child: Row(
@@ -169,11 +171,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 context,
                 AnimScaleTransition(
                     page: CategoryResultScreen(
-                  categoryName: product.category  ?? "N/A",
+                  categoryName: product.category ?? "N/A",
                 )));
           },
           child: Text(
-            product.category  ?? "N/A",
+            product.category ?? "N/A",
             style: text_7b44c0_16_Regular_w500_underline,
           ),
         )
@@ -214,7 +216,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           addVerticalSpace(Dimens.spacing_6),
           Text(
-            product.desc  ?? "N/A",
+            product.desc ?? "N/A",
             style: text_71727a_14_Light_w300,
           )
         ],
