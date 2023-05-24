@@ -116,6 +116,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return Padding(
       padding: const EdgeInsets.all(Dimens.spacing_16),
       child: Image.network(
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return const Center(
+              child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+            );
+          },
           (imageNames != "") ? imageNames : ImageConstants.IC_PLACEHOLDER),
     );
   }

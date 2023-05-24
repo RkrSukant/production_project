@@ -124,10 +124,17 @@ class _RoomsScreenState extends State<RoomsScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(Dimens.spacing_12),
-              child: FadeInImage.assetNetwork(
-                placeholder: ImageConstants.IC_LOADING,
-                placeholderFit: BoxFit.fitHeight,
-                image: model.imageName,
+              child: Image.network(
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+                  );
+                },
+                model.imageName,
                 fit: BoxFit.cover,
               ),
             ),

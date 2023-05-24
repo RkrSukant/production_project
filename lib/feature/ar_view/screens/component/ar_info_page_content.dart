@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:production_project/feature/ar_view/model/ar_info_model.dart';
+import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/widget_functions.dart';
@@ -23,6 +24,18 @@ class _ARInfoPageContentState extends State<ARInfoPageContent> {
       children: [
         Image.network(
           widget.model.image,
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return const SizedBox(
+              height: 475,
+              child: Center(
+                child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+              ),
+            );
+          },
           height: 475,
         ),
         addVerticalSpace(Dimens.spacing_16),

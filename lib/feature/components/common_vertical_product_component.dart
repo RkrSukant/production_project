@@ -58,10 +58,18 @@ class _CommonVerticalProductComponentState
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    FadeInImage.assetNetwork(
+                    Image.network(
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return const Center(
+                          child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+                        );
+                      },
                       width: Dimens.spacing_124,
-                      placeholder: ImageConstants.IC_PLACEHOLDER,
-                      image: widget.furnitureModel.imageNames ?? ImageConstants.IC_PLACEHOLDER,
+                      widget.furnitureModel.imageNames ?? ImageConstants.IC_PLACEHOLDER,
                     ),
                     addVerticalSpace(Dimens.spacing_16),
                     Column(
