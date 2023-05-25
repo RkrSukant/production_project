@@ -6,5 +6,7 @@ abstract class HomeRemote{
 
   Future<List<FurnitureModel>> getNewProducts();
 
+  Future<List<FurnitureModel>> getArProducts();
+
   Future<List<RoomModel>> getRoomList();
 }

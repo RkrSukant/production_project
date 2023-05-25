@@ -14,6 +14,8 @@ class HomeViewModel extends ChangeNotifier{
 
   Response<List<FurnitureModel>> latestFurnitureListUseCase = Response<List<FurnitureModel>>();
 
+  Response<List<FurnitureModel>> arFurnitureListUseCase = Response<List<FurnitureModel>>();
+
   void setHomeRoomListUseCase(Response<List<RoomModel>> response) {
     homeRoomListUseCase = response;
     notifyListeners();
@@ -26,6 +28,10 @@ class HomeViewModel extends ChangeNotifier{
 
   void setLatestFurnitureListUseCase(Response<List<FurnitureModel>> response) {
     latestFurnitureListUseCase = response;
+    notifyListeners();
+  }
+  void setArFurnitureListUseCase(Response<List<FurnitureModel>> response) {
+    arFurnitureListUseCase = response;
     notifyListeners();
   }
 
@@ -56,6 +62,16 @@ class HomeViewModel extends ChangeNotifier{
       setLatestFurnitureListUseCase(Response.complete(response));
     }on Exception catch (exception) {
       setLatestFurnitureListUseCase(Response.error(exception.toString()));
+    }
+  }
+
+  Future<void> getArProducts() async {
+    setArFurnitureListUseCase(Response.loading());
+    try{
+      var response = await repository.getArProducts();
+      setArFurnitureListUseCase(Response.complete(response));
+    }on Exception catch (exception) {
+      setArFurnitureListUseCase(Response.error(exception.toString()));
     }
   }
 }

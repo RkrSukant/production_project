@@ -47,6 +47,22 @@ class HomeRemoteImpl implements HomeRemote {
   }
 
   @override
+  Future<List<FurnitureModel>> getArProducts() async{
+    try {
+      var result = await _apiClient.dio.get(ApiConstants.furnituresAr
+      );
+      var baseResponse = BaseListResponse<FurnitureModel>.fromJson(
+          json.decode(result.toString()), (data) {
+        return data.map((response) => FurnitureModel.fromJson(response))
+            .toList();
+      });
+      return notNullMapperListRest(baseResponse);
+    }on Exception catch (exception){
+      throw FailedResponseException(exception.toString());
+    }
+  }
+
+  @override
   Future<List<RoomModel>> getRoomList() async{
     try{
       var result = await _apiClient.dio.get(ApiConstants.rooms);

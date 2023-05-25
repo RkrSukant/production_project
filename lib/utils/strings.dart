@@ -7,6 +7,7 @@ class Strings {
   static const String category = 'Category';
   static const String nRs = 'NRs';
   static const String ourNewReleases = 'Our New Releases';
+  static const String productsWithArView = 'Products with AR View';
   static const String viewByRoom = 'View By Room';
   static const String livingRoom = 'Living Room';
   static const String bedRoom = 'Bed Room';

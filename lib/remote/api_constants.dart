@@ -8,5 +8,6 @@ class ApiConstants{
   static String furnituresByRoom = 'furnitures/room';
   static String furnituresFeatured = 'furnitures/featured';
   static String furnituresLatest = 'furnitures/latest';
+  static String furnituresAr = 'furnitures/ar';
   static String furnituresById = 'furnitures';
 }

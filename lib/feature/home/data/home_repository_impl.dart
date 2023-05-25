@@ -17,7 +17,11 @@ class HomeRepositoryImpl implements HomeRepository{
   @override
   Future<List<FurnitureModel>> getNewProducts() async{
     return await remote.getNewProducts();
+  }
 
+  @override
+  Future<List<FurnitureModel>> getArProducts() async{
+    return await remote.getArProducts();
   }
 
   @override

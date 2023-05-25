@@ -39,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.wait([
       viewModel.getFeaturedProducts(),
       viewModel.getLatestProducts(),
+      viewModel.getArProducts(),
       viewModel.getRoomList()
     ]);
   }
@@ -61,6 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   _searchTextFieldComponent(),
                   addVerticalSpace(Dimens.spacing_16),
+                  const Text(
+                    Strings.productsWithArView,
+                    style: text_7b44c0_14_Medium_w600,
+                  ),
+                  addVerticalSpace(Dimens.spacing_16),
+                  _productHorizontalListViewComponent(Strings.productsWithArView),
+                  addVerticalSpace(Dimens.spacing_24),
                   _bannerComponent(ImageConstants.IC_Banner_1),
                   addVerticalSpace(Dimens.spacing_24),
                   const Text(
@@ -176,9 +184,43 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 300,
           child: _observeLatestProducts(),
         );
+      case Strings.productsWithArView:
+        return SizedBox(
+          height: 300,
+          child: _observeArProducts(),
+        );
       default:
         return Container();
     }
+  }
+
+  Widget _observeArProducts() {
+    return Consumer<HomeViewModel>(builder: (context, viewModel, _) {
+      switch (viewModel.arFurnitureListUseCase.state) {
+        case ResponseState.LOADING:
+          return const Center(child: CircularProgressIndicator());
+        case ResponseState.COMPLETE:
+          List<FurnitureModel> furnitures =
+              viewModel.arFurnitureListUseCase.data ?? [];
+          return ListView.separated(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: furnitures.length,
+            itemBuilder: (BuildContext context, int index) {
+              return CommonVerticalProductComponent(
+                furnitureModel: furnitures[index],
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return addHorizontalSpace(Dimens.spacing_16);
+            },
+          );
+        case ResponseState.ERROR:
+          return const Center(child: Text(Strings.something_went_wrong));
+        default:
+          return Container();
+      }
+    });
   }
 
   Widget _observeFeaturedProducts() {
