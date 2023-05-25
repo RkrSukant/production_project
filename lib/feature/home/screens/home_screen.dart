@@ -17,6 +17,7 @@ import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/utils.dart';
 import 'package:production_project/utils/widget_functions.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,6 +29,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   HomeViewModel viewModel = locator<HomeViewModel>();
   final TextEditingController _searchTextController = TextEditingController();
+  final RefreshController _refreshController =
+  RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -44,6 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
     ]);
   }
 
+  void _onRefresh() {
+    fetchData();
+    _refreshController.refreshCompleted();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeViewModel>(
@@ -51,50 +59,58 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         drawer: const NavigatorDrawerComponent(),
         appBar: _appBar(),
-        body: Container(
-          color: const AppColors().backGroundColor,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(Dimens.spacing_16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _searchTextFieldComponent(),
-                  addVerticalSpace(Dimens.spacing_16),
-                  const Text(
-                    Strings.productsWithArView,
-                    style: text_7b44c0_14_Medium_w600,
-                  ),
-                  addVerticalSpace(Dimens.spacing_16),
-                  _productHorizontalListViewComponent(Strings.productsWithArView),
-                  addVerticalSpace(Dimens.spacing_24),
-                  _bannerComponent(ImageConstants.IC_Banner_1),
-                  addVerticalSpace(Dimens.spacing_24),
-                  const Text(
-                    Strings.featuredProducts,
-                    style: text_7b44c0_14_Medium_w600,
-                  ),
-                  addVerticalSpace(Dimens.spacing_16),
-                  _productHorizontalListViewComponent(Strings.featuredProducts),
-                  addVerticalSpace(Dimens.spacing_24),
-                  _bannerComponent(ImageConstants.IC_Banner_2),
-                  addVerticalSpace(Dimens.spacing_24),
-                  const Text(
-                    Strings.ourNewReleases,
-                    style: text_7b44c0_14_Medium_w600,
-                  ),
-                  addVerticalSpace(Dimens.spacing_16),
-                  _productHorizontalListViewComponent(Strings.ourNewReleases),
-                  addVerticalSpace(Dimens.spacing_24),
-                  const Text(
-                    Strings.viewByRoom,
-                    style: text_7b44c0_14_Medium_w600,
-                  ),
-                  addVerticalSpace(Dimens.spacing_16),
-                  _observeRoomListResponse(),
-                  addVerticalSpace(18),
-                ],
+        body: SmartRefresher(
+          enablePullDown: true,
+          onRefresh: _onRefresh,
+          header: ClassicHeader(),
+          controller:_refreshController,
+          child: Container(
+            color: const AppColors().backGroundColor,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(Dimens.spacing_16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _searchTextFieldComponent(),
+                    addVerticalSpace(Dimens.spacing_16),
+                    const Text(
+                      Strings.productsWithArView,
+                      style: text_7b44c0_14_Medium_w600,
+                    ),
+                    addVerticalSpace(Dimens.spacing_16),
+                    _productHorizontalListViewComponent(
+                        Strings.productsWithArView),
+                    addVerticalSpace(Dimens.spacing_24),
+                    _bannerComponent(ImageConstants.IC_Banner_1),
+                    addVerticalSpace(Dimens.spacing_24),
+                    const Text(
+                      Strings.featuredProducts,
+                      style: text_7b44c0_14_Medium_w600,
+                    ),
+                    addVerticalSpace(Dimens.spacing_16),
+                    _productHorizontalListViewComponent(
+                        Strings.featuredProducts),
+                    addVerticalSpace(Dimens.spacing_24),
+                    _bannerComponent(ImageConstants.IC_Banner_2),
+                    addVerticalSpace(Dimens.spacing_24),
+                    const Text(
+                      Strings.ourNewReleases,
+                      style: text_7b44c0_14_Medium_w600,
+                    ),
+                    addVerticalSpace(Dimens.spacing_16),
+                    _productHorizontalListViewComponent(Strings.ourNewReleases),
+                    addVerticalSpace(Dimens.spacing_24),
+                    const Text(
+                      Strings.viewByRoom,
+                      style: text_7b44c0_14_Medium_w600,
+                    ),
+                    addVerticalSpace(Dimens.spacing_16),
+                    _observeRoomListResponse(),
+                    addVerticalSpace(18),
+                  ],
+                ),
               ),
             ),
           ),
@@ -148,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         hintText: Strings.search,
         hintStyle: text_8f9098_14_Regular_w400,
         filled: true,
@@ -303,8 +319,11 @@ class _HomeScreenState extends State<HomeScreen> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisExtent:
-              ((MediaQuery.of(context).size.width - Dimens.spacing_48) / 2) *
-                  (3 / 5),
+          ((MediaQuery
+              .of(context)
+              .size
+              .width - Dimens.spacing_48) / 2) *
+              (3 / 5),
           mainAxisSpacing: Dimens.spacing_6,
           crossAxisSpacing: Dimens.spacing_8,
         ),
@@ -338,7 +357,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     return child;
                   }
                   return const Center(
-                    child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+                    child: CircularProgressIndicator(
+                      color: AppColors.purple_rgba_7b44c0,),
                   );
                 },
                 fit: BoxFit.cover,
