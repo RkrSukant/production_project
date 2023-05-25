@@ -55,21 +55,22 @@ class _CommonVerticalProductComponentState
               child: SizedBox(
                 width: Dimens.spacing_164,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.network(
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) {
-                          return child;
-                        }
-                        return const Center(
-                          child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
-                        );
-                      },
-                      width: Dimens.spacing_124,
-                      widget.furnitureModel.imageNames ?? ImageConstants.IC_PLACEHOLDER,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(Dimens.spacing_12),
+                      child: Image.network(
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                          return const Center(
+                            child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+                          );
+                        },
+                        widget.furnitureModel.imageNames ?? ImageConstants.IC_PLACEHOLDER,
+                      ),
                     ),
                     addVerticalSpace(Dimens.spacing_16),
                     Column(

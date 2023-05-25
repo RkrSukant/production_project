@@ -168,12 +168,12 @@ class _HomeScreenState extends State<HomeScreen> {
     switch (type) {
       case Strings.featuredProducts:
         return SizedBox(
-          height: 270,
+          height: 300,
           child: _observeFeaturedProducts(),
         );
       case Strings.ourNewReleases:
         return SizedBox(
-          height: 270,
+          height: 300,
           child: _observeLatestProducts(),
         );
       default:
@@ -217,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return const Center(child: CircularProgressIndicator());
         case ResponseState.COMPLETE:
           List<FurnitureModel> furnitures =
-              viewModel.featuredFurnitureListUseCase.data ?? [];
+              viewModel.latestFurnitureListUseCase.data ?? [];
           return ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
