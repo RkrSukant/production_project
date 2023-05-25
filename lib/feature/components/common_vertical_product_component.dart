@@ -50,67 +50,80 @@ class _CommonVerticalProductComponentState
                       page:
                           ProductDetailScreen(product: widget.furnitureModel)));
             },
-            child: Padding(
-              padding: const EdgeInsets.all(Dimens.spacing_16),
-              child: SizedBox(
-                width: Dimens.spacing_164,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(Dimens.spacing_12),
-                      child: Image.network(
-                        loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent? loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
-                          return const Center(
-                            child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
-                          );
-                        },
-                        widget.furnitureModel.imageNames ?? ImageConstants.IC_PLACEHOLDER,
-                      ),
-                    ),
-                    addVerticalSpace(Dimens.spacing_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(Dimens.spacing_16),
+                  child: SizedBox(
+                    width: Dimens.spacing_164,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          widget.furnitureModel.title ?? "N/A",
-                          style: text_2f3036_14_Bold_w700,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(Dimens.spacing_12),
+                          child: Image.network(
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              }
+                              return const Center(
+                                child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+                              );
+                            },
+                            widget.furnitureModel.imageNames ?? ImageConstants.IC_PLACEHOLDER,
+                          ),
                         ),
-                        addVerticalSpace(Dimens.spacing_4),
-                        Text(
-                          widget.furnitureModel.category ?? "N/A",
-                          style: text_7b44c0_8_regular_w400,
+                        addVerticalSpace(Dimens.spacing_16),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              widget.furnitureModel.title ?? "N/A",
+                              style: text_2f3036_14_Bold_w700,
+                            ),
+                            addVerticalSpace(Dimens.spacing_4),
+                            Text(
+                              widget.furnitureModel.category ?? "N/A",
+                              style: text_7b44c0_8_regular_w400,
+                            ),
+                            addVerticalSpace(Dimens.spacing_4),
+                            Text(
+                              widget.furnitureModel.desc ?? "",
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: text_71727a_8_Regular_w400,
+                            ),
+                          ],
                         ),
-                        addVerticalSpace(Dimens.spacing_4),
-                        Text(
-                          widget.furnitureModel.desc ?? "",
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: text_71727a_8_Regular_w400,
+                        addVerticalSpace(Dimens.spacing_16),
+                        Center(
+                          child: Row(mainAxisSize: MainAxisSize.min, children: [
+                            const Text(
+                              Strings.nRs,
+                              style: text_7b44c0_10_bold_w600,
+                            ),
+                            Text(
+                              widget.furnitureModel.price.toString(),
+                              style: text_7b44c0_10_bold_w600,
+                            )
+                          ]),
                         ),
                       ],
                     ),
-                    addVerticalSpace(Dimens.spacing_16),
-                    Center(
-                      child: Row(mainAxisSize: MainAxisSize.min, children: [
-                        const Text(
-                          Strings.nRs,
-                          style: text_7b44c0_10_bold_w600,
-                        ),
-                        Text(
-                          widget.furnitureModel.price.toString(),
-                          style: text_7b44c0_10_bold_w600,
-                        )
-                      ]),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                Visibility(
+                  visible: (widget.furnitureModel.arObj != null),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: Dimens.spacing_10),
+                        child: Image.asset(ImageConstants.IC_AR_CORNER_BANNER, height: 35,)),
+                  ),
+                ),
+              ],
             )),
       ),
     );
