@@ -47,11 +47,14 @@ class _SearchScreenState extends State<SearchScreen> {
       create: (BuildContext context) => viewModel,
       child: Scaffold(
         appBar: _appBar(),
-        body: Container(
-          color: const AppColors().backGroundColor,
-          child: Padding(
-            padding: const EdgeInsets.all(Dimens.spacing_16),
-            child: _observeSearchWidget(),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
+            color: const AppColors().backGroundColor,
+            child: Padding(
+              padding: const EdgeInsets.all(Dimens.spacing_16),
+              child: _observeSearchWidget(),
+            ),
           ),
         ),
       ),
@@ -92,17 +95,15 @@ class _SearchScreenState extends State<SearchScreen> {
         case ResponseState.COMPLETE:
           furnitures = viewModel.searchListUseCase.data ?? [];
           EasyLoading.dismiss();
-          return SingleChildScrollView(
-            child: Column(children: [
-              _searchBarWidget(),
-              addVerticalSpace(Dimens.spacing_16),
-              Visibility(
-                  visible:noResult ?? false,
-                  child: const Center(child: Text(Strings.no_result_found))
-              ),
-              _searchResultWidget()
-            ]),
-          );
+          return Column(children: [
+            _searchBarWidget(),
+            addVerticalSpace(Dimens.spacing_16),
+            Visibility(
+                visible:noResult ?? false,
+                child: const Center(child: Text(Strings.no_result_found))
+            ),
+            _searchResultWidget()
+          ]);
         case ResponseState.ERROR:
           return const Center(
             child: Text(Strings.something_went_wrong),
