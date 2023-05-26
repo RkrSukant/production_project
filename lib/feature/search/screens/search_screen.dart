@@ -25,6 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
   SearchViewModel viewModel = locator<SearchViewModel>();
   TextEditingController searchTextController = TextEditingController();
   bool? searchResultVisible;
+  bool? noResult;
   List<FurnitureModel> furnitures = [];
   List<FurnitureModel> tempFurnitureList = [];
 
@@ -33,6 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
     super.initState();
     fetchData();
     searchResultVisible = false;
+    noResult = false;
   }
 
   void fetchData() async {
@@ -94,6 +96,10 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(children: [
               _searchBarWidget(),
               addVerticalSpace(Dimens.spacing_16),
+              Visibility(
+                  visible:noResult ?? false,
+                  child: const Center(child: Text(Strings.no_result_found))
+              ),
               _searchResultWidget()
             ]),
           );
@@ -143,12 +149,17 @@ class _SearchScreenState extends State<SearchScreen> {
             setState(() {
               tempFurnitureList = [];
               if(searchValue == ""){
+                noResult= false;
                 return;
               }
               for (var furniture in furnitures) {
                 if ((furniture.title ?? '').toLowerCase().contains(searchValue.toLowerCase())) {
                   tempFurnitureList.add(furniture);
                 }
+              }
+
+              if(tempFurnitureList.isEmpty){
+                noResult=true;
               }
             });
           },

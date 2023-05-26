@@ -39,5 +39,6 @@ class Strings {
   static const String storage_permission_not_granted = 'Storage Permission Not Granted';
   static const String back = 'Back';
   static const String ar_view_info = 'AR View Info';
+  static const String no_result_found = 'No Results Found';
 
 }
