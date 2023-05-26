@@ -147,9 +147,9 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           onChanged: (searchValue) {
             setState(() {
+              noResult=false;
               tempFurnitureList = [];
               if(searchValue == ""){
-                noResult= false;
                 return;
               }
               for (var furniture in furnitures) {
