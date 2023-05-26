@@ -177,6 +177,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Widget _searchResultWidget() {
     return GridView.builder(
+      physics: ScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: (1/1.5),
           crossAxisCount: 2,
