@@ -1,5 +1,7 @@
-# production_project
+# FurniHome AR App - Furniture Catalog App with Augmented Reality
+**FurniHome AR App** is a Flutter-powered Furniture Catalog application designed to help customers visualize furniture in their homes using Augmented Reality(AR). The application makes it easier to make more well informed decisions when purchasing furniture.
 
-Furniture Catalog app with capability to view in AR
+## Supported Platforms:
+- Android
 
-## Getting Started
+

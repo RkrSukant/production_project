@@ -13,8 +13,8 @@ class AppTheme {
         primaryColor: colors.backGroundColor,
         scaffoldBackgroundColor: colors.backGroundColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        colorScheme:
-        ColorScheme.fromSwatch().copyWith(secondary: colors.secondaryColor),
-        backgroundColor: colors.backGroundColor);
+        colorScheme: ColorScheme.fromSwatch()
+            .copyWith(secondary: colors.secondaryColor)
+            .copyWith(surface: colors.backGroundColor));
   }
 }
