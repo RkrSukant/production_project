@@ -1,4 +1,4 @@
-name: production_project
+name: furnihome_ar
 description: Furniture Catalog app with capability to view in AR
 
 # The following line prevents the package from being accidentally published to

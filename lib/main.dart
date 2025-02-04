@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:production_project/feature/landing/splash_screen.dart';
-import 'package:production_project/utils/app_theme.dart';
-import 'package:production_project/utils/strings.dart';
+import 'package:furnihome_ar/feature/landing/splash_screen.dart';
+import 'package:furnihome_ar/utils/app_theme.dart';
+import 'package:furnihome_ar/utils/strings.dart';
 
 import 'di/service_locator.dart' as di;
 

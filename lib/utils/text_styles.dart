@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:production_project/utils/colors.dart';
-import 'package:production_project/utils/dimens.dart';
+import 'package:furnihome_ar/utils/colors.dart';
+import 'package:furnihome_ar/utils/dimens.dart';
 
 const TextStyle text_2E384D_28_Light = TextStyle(
     color: AppColors.black_rgba_1f2024,

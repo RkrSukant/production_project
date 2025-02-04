@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:production_project/common_models/furniture_model.dart';
-import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/categories/data/categories_repository.dart';
-import 'package:production_project/feature/categories/model/category_model.dart';
-import 'package:production_project/utils/response.dart';
+import 'package:furnihome_ar/common_models/furniture_model.dart';
+import 'package:furnihome_ar/di/service_locator.dart';
+import 'package:furnihome_ar/feature/categories/data/categories_repository.dart';
+import 'package:furnihome_ar/feature/categories/model/category_model.dart';
+import 'package:furnihome_ar/utils/response.dart';
 
 class CategoriesViewModel extends ChangeNotifier {
   CategoriesRepository repository = locator<CategoriesRepository>();

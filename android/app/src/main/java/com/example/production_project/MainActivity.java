@@ -1,4 +1,4 @@
-package com.example.production_project;
+package com.example.furnihome_ar;
 
 import io.flutter.embedding.android.FlutterActivity;
 

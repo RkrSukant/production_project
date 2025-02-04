@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:production_project/common_models/furniture_model.dart';
-import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/search/data/search_repository.dart';
-import 'package:production_project/utils/response.dart';
+import 'package:furnihome_ar/common_models/furniture_model.dart';
+import 'package:furnihome_ar/di/service_locator.dart';
+import 'package:furnihome_ar/feature/search/data/search_repository.dart';
+import 'package:furnihome_ar/utils/response.dart';
 
 class SearchViewModel extends ChangeNotifier {
   SearchRepository repository = locator<SearchRepository>();

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:production_project/anim/anim_scale_transition.dart';
-import 'package:production_project/feature/categories/screens/categories_screen.dart';
-import 'package:production_project/feature/rooms/screens/rooms_screen.dart';
-import 'package:production_project/feature/search/screens/search_screen.dart';
-import 'package:production_project/utils/colors.dart';
-import 'package:production_project/utils/dimens.dart';
-import 'package:production_project/utils/image_constants.dart';
-import 'package:production_project/utils/strings.dart';
-import 'package:production_project/utils/text_styles.dart';
-import 'package:production_project/utils/widget_functions.dart';
+import 'package:furnihome_ar/anim/anim_scale_transition.dart';
+import 'package:furnihome_ar/feature/categories/screens/categories_screen.dart';
+import 'package:furnihome_ar/feature/rooms/screens/rooms_screen.dart';
+import 'package:furnihome_ar/feature/search/screens/search_screen.dart';
+import 'package:furnihome_ar/utils/colors.dart';
+import 'package:furnihome_ar/utils/dimens.dart';
+import 'package:furnihome_ar/utils/image_constants.dart';
+import 'package:furnihome_ar/utils/strings.dart';
+import 'package:furnihome_ar/utils/text_styles.dart';
+import 'package:furnihome_ar/utils/widget_functions.dart';
 
 class NavigatorDrawerComponent extends StatelessWidget {
   const NavigatorDrawerComponent({Key? key}) : super(key: key);

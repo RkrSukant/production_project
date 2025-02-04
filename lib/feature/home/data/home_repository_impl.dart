@@ -1,9 +1,9 @@
-import 'package:production_project/common_models/furniture_model.dart';
-import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/home/data/home_repository.dart';
-import 'package:production_project/feature/home/data/local/home_local.dart';
-import 'package:production_project/feature/home/data/remote/home_remote.dart';
-import 'package:production_project/feature/rooms/model/rooms_model.dart';
+import 'package:furnihome_ar/common_models/furniture_model.dart';
+import 'package:furnihome_ar/di/service_locator.dart';
+import 'package:furnihome_ar/feature/home/data/home_repository.dart';
+import 'package:furnihome_ar/feature/home/data/local/home_local.dart';
+import 'package:furnihome_ar/feature/home/data/remote/home_remote.dart';
+import 'package:furnihome_ar/feature/rooms/model/rooms_model.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
   final HomeRemote remote = locator<HomeRemote>();

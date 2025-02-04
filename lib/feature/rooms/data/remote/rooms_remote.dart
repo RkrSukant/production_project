@@ -1,5 +1,5 @@
-import 'package:production_project/common_models/furniture_model.dart';
-import 'package:production_project/feature/rooms/model/rooms_model.dart';
+import 'package:furnihome_ar/common_models/furniture_model.dart';
+import 'package:furnihome_ar/feature/rooms/model/rooms_model.dart';
 
 abstract class RoomsRemote {
   Future<List<RoomModel>> getRoomList();

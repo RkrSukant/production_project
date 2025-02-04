@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:production_project/feature/ar_view/model/ar_info_model.dart';
-import 'package:production_project/feature/ar_view/screens/component/ar_info_page_content.dart';
-import 'package:production_project/feature/ar_view/screens/component/ar_info_page_indicator.dart';
-import 'package:production_project/utils/colors.dart';
-import 'package:production_project/utils/dimens.dart';
-import 'package:production_project/utils/image_constants.dart';
-import 'package:production_project/utils/strings.dart';
-import 'package:production_project/utils/text_styles.dart';
+import 'package:furnihome_ar/feature/ar_view/model/ar_info_model.dart';
+import 'package:furnihome_ar/feature/ar_view/screens/component/ar_info_page_content.dart';
+import 'package:furnihome_ar/feature/ar_view/screens/component/ar_info_page_indicator.dart';
+import 'package:furnihome_ar/utils/colors.dart';
+import 'package:furnihome_ar/utils/dimens.dart';
+import 'package:furnihome_ar/utils/image_constants.dart';
+import 'package:furnihome_ar/utils/strings.dart';
+import 'package:furnihome_ar/utils/text_styles.dart';
 
 class ARViewInfoScreen extends StatefulWidget {
   const ARViewInfoScreen({Key? key}) : super(key: key);

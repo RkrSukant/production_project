@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:production_project/remote/api_constants.dart';
+import 'package:furnihome_ar/remote/api_constants.dart';
 
 class ApiClient {
   Dio get dio => _getDio();

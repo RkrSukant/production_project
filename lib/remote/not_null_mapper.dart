@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:production_project/remote/dio/base_list_response.dart';
-import 'package:production_project/remote/dio/base_response.dart';
+import 'package:furnihome_ar/remote/dio/base_list_response.dart';
+import 'package:furnihome_ar/remote/dio/base_response.dart';
 
 import 'errors.dart';
 

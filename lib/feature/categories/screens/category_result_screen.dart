@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:production_project/common_models/furniture_model.dart';
-import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/categories/screens/categories_viewmodel.dart';
-import 'package:production_project/feature/components/common_vertical_product_component.dart';
-import 'package:production_project/utils/colors.dart';
-import 'package:production_project/utils/dimens.dart';
-import 'package:production_project/utils/image_constants.dart';
-import 'package:production_project/utils/response_state.dart';
-import 'package:production_project/utils/strings.dart';
-import 'package:production_project/utils/text_styles.dart';
+import 'package:furnihome_ar/common_models/furniture_model.dart';
+import 'package:furnihome_ar/di/service_locator.dart';
+import 'package:furnihome_ar/feature/categories/screens/categories_viewmodel.dart';
+import 'package:furnihome_ar/feature/components/common_vertical_product_component.dart';
+import 'package:furnihome_ar/utils/colors.dart';
+import 'package:furnihome_ar/utils/dimens.dart';
+import 'package:furnihome_ar/utils/image_constants.dart';
+import 'package:furnihome_ar/utils/response_state.dart';
+import 'package:furnihome_ar/utils/strings.dart';
+import 'package:furnihome_ar/utils/text_styles.dart';
 import 'package:provider/provider.dart';
 
 class CategoryResultScreen extends StatefulWidget {

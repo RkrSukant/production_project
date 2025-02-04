@@ -1,4 +1,4 @@
-import 'package:production_project/utils/response_state.dart';
+import 'package:furnihome_ar/utils/response_state.dart';
 
 class Response<ResultType> {
   ResponseState? state;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:production_project/feature/ar_view/model/ar_info_model.dart';
-import 'package:production_project/utils/colors.dart';
-import 'package:production_project/utils/dimens.dart';
-import 'package:production_project/utils/text_styles.dart';
-import 'package:production_project/utils/widget_functions.dart';
+import 'package:furnihome_ar/feature/ar_view/model/ar_info_model.dart';
+import 'package:furnihome_ar/utils/colors.dart';
+import 'package:furnihome_ar/utils/dimens.dart';
+import 'package:furnihome_ar/utils/text_styles.dart';
+import 'package:furnihome_ar/utils/widget_functions.dart';
 
 class ARInfoPageContent extends StatefulWidget {
   const ARInfoPageContent({Key? key, required this.model}) : super(key: key);

@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:production_project/common_models/furniture_model.dart';
-import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/categories/data/remote/categories_remote.dart';
-import 'package:production_project/feature/categories/model/category_model.dart';
-import 'package:production_project/remote/api_constants.dart';
-import 'package:production_project/remote/dio/base_list_response.dart';
-import 'package:production_project/remote/errors.dart';
-import 'package:production_project/remote/http_client.dart';
-import 'package:production_project/remote/not_null_mapper.dart';
+import 'package:furnihome_ar/common_models/furniture_model.dart';
+import 'package:furnihome_ar/di/service_locator.dart';
+import 'package:furnihome_ar/feature/categories/data/remote/categories_remote.dart';
+import 'package:furnihome_ar/feature/categories/model/category_model.dart';
+import 'package:furnihome_ar/remote/api_constants.dart';
+import 'package:furnihome_ar/remote/dio/base_list_response.dart';
+import 'package:furnihome_ar/remote/errors.dart';
+import 'package:furnihome_ar/remote/http_client.dart';
+import 'package:furnihome_ar/remote/not_null_mapper.dart';
 
 class CategoriesRemoteImpl implements CategoriesRemote {
   static final ApiClient _apiClient = locator<ApiClient>();

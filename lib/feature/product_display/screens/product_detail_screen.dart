@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:production_project/anim/anim_scale_transition.dart';
-import 'package:production_project/common_models/furniture_model.dart';
-import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/ar_view/screens/ar_view_screen.dart';
-import 'package:production_project/feature/categories/screens/category_result_screen.dart';
-import 'package:production_project/feature/product_display/screens/product_detail_viewmodel.dart';
-import 'package:production_project/utils/colors.dart';
-import 'package:production_project/utils/dimens.dart';
-import 'package:production_project/utils/image_constants.dart';
-import 'package:production_project/utils/strings.dart';
-import 'package:production_project/utils/text_styles.dart';
-import 'package:production_project/utils/utils.dart';
-import 'package:production_project/utils/widget_functions.dart';
+import 'package:furnihome_ar/anim/anim_scale_transition.dart';
+import 'package:furnihome_ar/common_models/furniture_model.dart';
+import 'package:furnihome_ar/di/service_locator.dart';
+import 'package:furnihome_ar/feature/ar_view/screens/ar_view_screen.dart';
+import 'package:furnihome_ar/feature/categories/screens/category_result_screen.dart';
+import 'package:furnihome_ar/feature/product_display/screens/product_detail_viewmodel.dart';
+import 'package:furnihome_ar/utils/colors.dart';
+import 'package:furnihome_ar/utils/dimens.dart';
+import 'package:furnihome_ar/utils/image_constants.dart';
+import 'package:furnihome_ar/utils/strings.dart';
+import 'package:furnihome_ar/utils/text_styles.dart';
+import 'package:furnihome_ar/utils/utils.dart';
+import 'package:furnihome_ar/utils/widget_functions.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {

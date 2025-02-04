@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:production_project/utils/colors.dart';
-import 'package:production_project/utils/dimens.dart';
+import 'package:furnihome_ar/utils/colors.dart';
+import 'package:furnihome_ar/utils/dimens.dart';
 
 class ARInfoPageIndicator extends StatelessWidget {
   const ARInfoPageIndicator({Key? key, this.isActive = false})

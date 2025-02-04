@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:production_project/anim/anim_scale_transition.dart';
-import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/rooms/model/rooms_model.dart';
-import 'package:production_project/feature/rooms/screens/room_result_screen.dart';
-import 'package:production_project/feature/rooms/screens/rooms_viewmodel.dart';
-import 'package:production_project/utils/colors.dart';
-import 'package:production_project/utils/dimens.dart';
-import 'package:production_project/utils/image_constants.dart';
-import 'package:production_project/utils/response_state.dart';
-import 'package:production_project/utils/strings.dart';
-import 'package:production_project/utils/text_styles.dart';
-import 'package:production_project/utils/utils.dart';
+import 'package:furnihome_ar/anim/anim_scale_transition.dart';
+import 'package:furnihome_ar/di/service_locator.dart';
+import 'package:furnihome_ar/feature/rooms/model/rooms_model.dart';
+import 'package:furnihome_ar/feature/rooms/screens/room_result_screen.dart';
+import 'package:furnihome_ar/feature/rooms/screens/rooms_viewmodel.dart';
+import 'package:furnihome_ar/utils/colors.dart';
+import 'package:furnihome_ar/utils/dimens.dart';
+import 'package:furnihome_ar/utils/image_constants.dart';
+import 'package:furnihome_ar/utils/response_state.dart';
+import 'package:furnihome_ar/utils/strings.dart';
+import 'package:furnihome_ar/utils/text_styles.dart';
+import 'package:furnihome_ar/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class RoomsScreen extends StatefulWidget {

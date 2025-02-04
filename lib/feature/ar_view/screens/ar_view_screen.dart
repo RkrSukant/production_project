@@ -12,14 +12,14 @@ import 'package:ar_flutter_plugin/widgets/ar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:production_project/anim/anim_scale_transition.dart';
-import 'package:production_project/common_models/furniture_model.dart';
-import 'package:production_project/feature/ar_view/screens/ar_view_info_screen.dart';
-import 'package:production_project/utils/colors.dart';
-import 'package:production_project/utils/dimens.dart';
-import 'package:production_project/utils/strings.dart';
-import 'package:production_project/utils/utils.dart';
-import 'package:production_project/utils/widget_functions.dart';
+import 'package:furnihome_ar/anim/anim_scale_transition.dart';
+import 'package:furnihome_ar/common_models/furniture_model.dart';
+import 'package:furnihome_ar/feature/ar_view/screens/ar_view_info_screen.dart';
+import 'package:furnihome_ar/utils/colors.dart';
+import 'package:furnihome_ar/utils/dimens.dart';
+import 'package:furnihome_ar/utils/strings.dart';
+import 'package:furnihome_ar/utils/utils.dart';
+import 'package:furnihome_ar/utils/widget_functions.dart';
 import 'package:vector_math/vector_math_64.dart';
 
 class ARViewScreen extends StatefulWidget {
