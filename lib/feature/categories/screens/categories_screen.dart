@@ -22,7 +22,6 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-
   CategoriesViewModel viewModel = locator<CategoriesViewModel>();
 
   List<CategoryModel> categories = [];
@@ -91,24 +90,24 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisExtent: ((MediaQuery
-                    .of(context)
-                    .size
-                    .width - Dimens.spacing_48) / 2) * (3 / 5),
+                mainAxisExtent:
+                    ((MediaQuery.of(context).size.width - Dimens.spacing_48) /
+                            2) *
+                        (3 / 5),
                 mainAxisSpacing: Dimens.spacing_6,
                 crossAxisSpacing: Dimens.spacing_8,
               ),
               shrinkWrap: true,
               itemCount: items.length,
               itemBuilder: (context, index) {
-                return _categoryGridComponent(
-                    items[index]);
-              }
-          );
+                return _categoryGridComponent(items[index]);
+              });
         case ResponseState.ERROR:
           EasyLoading.dismiss();
           debugPrint(viewModel.categoryListUseCase.exception);
-          return const Center(child: Text(Strings.something_went_wrong),);
+          return const Center(
+            child: Text(Strings.something_went_wrong),
+          );
         default:
           return Container();
       }
@@ -118,7 +117,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget _categoryGridComponent(CategoryModel model) {
     return OnClickWidget(
       onClick: () {
-        Navigator.push(context, AnimScaleTransition(page: CategoryResultScreen(categoryName: model.categoryName)));
+        Navigator.push(
+            context,
+            AnimScaleTransition(
+                page: CategoryResultScreen(categoryName: model.categoryName)));
       },
       child: Card(
         child: Stack(
@@ -126,7 +128,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(Dimens.spacing_12),
-              child:Image.network(
+              child: Image.network(
                 model.imageName,
                 loadingBuilder: (BuildContext context, Widget child,
                     ImageChunkEvent? loadingProgress) {
@@ -134,16 +136,22 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     return child;
                   }
                   return const Center(
-                    child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+                    child: CircularProgressIndicator(
+                      color: AppColors.purple_rgba_7b44c0,
+                    ),
                   );
                 },
                 fit: BoxFit.cover,
               ),
             ),
-            Center(child: Padding(
-                padding: const EdgeInsets.all(Dimens.spacing_8),
-                child: Text(model.categoryName, style: text_ffffff_16_Bold_w700,
-                  textAlign: TextAlign.center,))),
+            Center(
+                child: Padding(
+                    padding: const EdgeInsets.all(Dimens.spacing_8),
+                    child: Text(
+                      model.categoryName,
+                      style: text_ffffff_16_Bold_w700,
+                      textAlign: TextAlign.center,
+                    ))),
           ],
         ),
       ),

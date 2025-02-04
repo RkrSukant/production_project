@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:production_project/anim/anim_scale_transition.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/feature/product_display/screens/product_detail_screen.dart';
-import 'package:production_project/utils/strings.dart';
-import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
 import 'package:production_project/utils/image_constants.dart';
+import 'package:production_project/utils/strings.dart';
+import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/utils.dart';
 import 'package:production_project/utils/widget_functions.dart';
 
@@ -60,7 +60,8 @@ class _CommonVerticalProductComponentState
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(Dimens.spacing_12),
+                          borderRadius:
+                              BorderRadius.circular(Dimens.spacing_12),
                           child: Image.network(
                             loadingBuilder: (BuildContext context, Widget child,
                                 ImageChunkEvent? loadingProgress) {
@@ -68,10 +69,13 @@ class _CommonVerticalProductComponentState
                                 return child;
                               }
                               return const Center(
-                                child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+                                child: CircularProgressIndicator(
+                                  color: AppColors.purple_rgba_7b44c0,
+                                ),
                               );
                             },
-                            widget.furnitureModel.imageNames ?? ImageConstants.IC_PLACEHOLDER,
+                            widget.furnitureModel.imageNames ??
+                                ImageConstants.IC_PLACEHOLDER,
                           ),
                         ),
                         addVerticalSpace(Dimens.spacing_16),
@@ -120,7 +124,10 @@ class _CommonVerticalProductComponentState
                     alignment: Alignment.topLeft,
                     child: Padding(
                         padding: const EdgeInsets.only(top: Dimens.spacing_10),
-                        child: Image.asset(ImageConstants.IC_AR_CORNER_BANNER, height: 35,)),
+                        child: Image.asset(
+                          ImageConstants.IC_AR_CORNER_BANNER,
+                          height: 35,
+                        )),
                   ),
                 ),
               ],

@@ -1,11 +1,9 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'rooms_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class RoomModel{
-
+class RoomModel {
   @JsonKey(name: 'room_id')
   int id;
 
@@ -15,8 +13,10 @@ class RoomModel{
   @JsonKey(name: 'room_image')
   String imageName;
 
-  RoomModel({required this.id,required this.title,required this.imageName});
+  RoomModel({required this.id, required this.title, required this.imageName});
 
-  factory RoomModel.fromJson(Map<String,dynamic> json)=>_$RoomModelFromJson(json);
-  Map<String,dynamic> toJson() => _$RoomModelToJson(this);
+  factory RoomModel.fromJson(Map<String, dynamic> json) =>
+      _$RoomModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RoomModelToJson(this);
 }

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 @immutable
 class AppColors {
-  final primaryColor= const Color(0xFFFFFFFF);
+  final primaryColor = const Color(0xFFFFFFFF);
   final secondaryColor = const Color(0xFFFFFFFF);
   final backGroundColor = const Color(0xFFF8F9FE);
 
-  static const white_rbga_ffffff = const Color.fromRGBO(255,255,255,1);
+  static const white_rbga_ffffff = const Color.fromRGBO(255, 255, 255, 1);
 
   static const grey_rgba_8F9098 = Color.fromRGBO(143, 144, 152, 1);
   static const black_rgba_1f2024 = Color.fromRGBO(31, 32, 36, 1);

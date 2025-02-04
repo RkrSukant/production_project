@@ -30,12 +30,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   void initState() {
     super.initState();
-    // fetchData();
   }
-
-  // Future<void> fetchData() async {
-  //   Future.wait([]);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -117,17 +112,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       padding: const EdgeInsets.all(Dimens.spacing_16),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Dimens.spacing_12),
-        child: Image.network(
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) {
-                return child;
-              }
-              return const Center(
-                child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
-              );
-            },
-            (imageNames != "") ? imageNames : ImageConstants.IC_PLACEHOLDER),
+        child: Image.network(loadingBuilder: (BuildContext context,
+            Widget child, ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.purple_rgba_7b44c0,
+            ),
+          );
+        }, (imageNames != "") ? imageNames : ImageConstants.IC_PLACEHOLDER),
       ),
     );
   }

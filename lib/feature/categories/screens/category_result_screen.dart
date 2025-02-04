@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/di/service_locator.dart';
-import 'package:production_project/feature/categories/model/category_model.dart';
 import 'package:production_project/feature/categories/screens/categories_viewmodel.dart';
 import 'package:production_project/feature/components/common_vertical_product_component.dart';
 import 'package:production_project/utils/colors.dart';
@@ -86,7 +85,7 @@ class _CategoryResultScreenState extends State<CategoryResultScreen> {
               viewModel.categoryFurnitureListUseCase.data ?? [];
           return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: (1/1.5),
+                childAspectRatio: (1 / 1.5),
                 crossAxisCount: 2,
                 mainAxisSpacing: Dimens.spacing_6,
                 crossAxisSpacing: Dimens.spacing_8,

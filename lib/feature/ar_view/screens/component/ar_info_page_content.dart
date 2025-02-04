@@ -6,10 +6,7 @@ import 'package:production_project/utils/text_styles.dart';
 import 'package:production_project/utils/widget_functions.dart';
 
 class ARInfoPageContent extends StatefulWidget {
-  const ARInfoPageContent(
-      {Key? key,
-        required this.model})
-      : super(key: key);
+  const ARInfoPageContent({Key? key, required this.model}) : super(key: key);
 
   final ARInfoModel model;
 
@@ -32,7 +29,9 @@ class _ARInfoPageContentState extends State<ARInfoPageContent> {
             return const SizedBox(
               height: 475,
               child: Center(
-                child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+                child: CircularProgressIndicator(
+                  color: AppColors.purple_rgba_7b44c0,
+                ),
               ),
             );
           },

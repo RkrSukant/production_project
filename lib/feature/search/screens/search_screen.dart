@@ -3,7 +3,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/di/service_locator.dart';
 import 'package:production_project/feature/components/common_vertical_product_component.dart';
-import 'package:production_project/feature/rooms/screens/rooms_viewmodel.dart';
 import 'package:production_project/feature/search/screens/search_viewmodel.dart';
 import 'package:production_project/utils/colors.dart';
 import 'package:production_project/utils/dimens.dart';
@@ -99,9 +98,8 @@ class _SearchScreenState extends State<SearchScreen> {
             _searchBarWidget(),
             addVerticalSpace(Dimens.spacing_16),
             Visibility(
-                visible:noResult ?? false,
-                child: const Center(child: Text(Strings.no_result_found))
-            ),
+                visible: noResult ?? false,
+                child: const Center(child: Text(Strings.no_result_found))),
             _searchResultWidget()
           ]);
         case ResponseState.ERROR:
@@ -132,14 +130,14 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             contentPadding:
-            const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             hintText: Strings.search,
             hintStyle: text_8f9098_14_Regular_w400,
             filled: true,
             fillColor: const Color.fromRGBO(255, 255, 255, 1),
             enabledBorder: OutlineInputBorder(
               borderSide:
-              const BorderSide(color: Color.fromRGBO(197, 198, 204, 1)),
+                  const BorderSide(color: Color.fromRGBO(197, 198, 204, 1)),
               borderRadius: BorderRadius.circular(12),
             ),
             focusedBorder: OutlineInputBorder(
@@ -148,19 +146,21 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           onChanged: (searchValue) {
             setState(() {
-              noResult=false;
+              noResult = false;
               tempFurnitureList = [];
-              if(searchValue == ""){
+              if (searchValue == "") {
                 return;
               }
               for (var furniture in furnitures) {
-                if ((furniture.title ?? '').toLowerCase().contains(searchValue.toLowerCase())) {
+                if ((furniture.title ?? '')
+                    .toLowerCase()
+                    .contains(searchValue.toLowerCase())) {
                   tempFurnitureList.add(furniture);
                 }
               }
 
-              if(tempFurnitureList.isEmpty){
-                noResult=true;
+              if (tempFurnitureList.isEmpty) {
+                noResult = true;
               }
             });
           },
@@ -169,17 +169,16 @@ class _SearchScreenState extends State<SearchScreen> {
         Visibility(
             visible: searchResultVisible ?? false,
             child: Text(
-                "${Strings.search_result_for} \"${searchTextController
-                    .text}\""))
+                "${Strings.search_result_for} \"${searchTextController.text}\""))
       ],
     );
   }
 
   Widget _searchResultWidget() {
     return GridView.builder(
-      physics: ScrollPhysics(),
+        physics: ScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: (1/1.5),
+          childAspectRatio: (1 / 1.5),
           crossAxisCount: 2,
           mainAxisSpacing: Dimens.spacing_6,
           crossAxisSpacing: Dimens.spacing_8,

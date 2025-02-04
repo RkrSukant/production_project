@@ -45,7 +45,8 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
               child: Padding(
                   padding: const EdgeInsets.only(bottom: Dimens.spacing_50),
-                  child: Image.asset(ImageConstants.IC_APP_LOGO, width: Dimens.spacing_250))),
+                  child: Image.asset(ImageConstants.IC_APP_LOGO,
+                      width: Dimens.spacing_250))),
           const Positioned.fill(
               bottom: 50,
               child: Align(

@@ -1,7 +1,7 @@
 import 'package:production_project/common_models/furniture_model.dart';
 import 'package:production_project/feature/rooms/model/rooms_model.dart';
 
-abstract class HomeRepository{
+abstract class HomeRepository {
   Future<List<FurnitureModel>> getFeaturedProducts();
 
   Future<List<FurnitureModel>> getNewProducts();

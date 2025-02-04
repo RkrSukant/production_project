@@ -1,4 +1,4 @@
-class Dimens{
+class Dimens {
 
   static const double spacing_500 = 500.0;
   static const double spacing_300 = 300.0;

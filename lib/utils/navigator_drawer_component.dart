@@ -44,7 +44,7 @@ class NavigatorDrawerComponent extends StatelessWidget {
                           child: ClipRRect(
                             child: Image.asset(ImageConstants.IC_APP_LOGO),
                             borderRadius:
-                                BorderRadius.circular(Dimens.spacing_10),
+                            BorderRadius.circular(Dimens.spacing_10),
                           ),
                         ),
                       ),
@@ -83,7 +83,7 @@ class NavigatorDrawerComponent extends StatelessWidget {
             ListTile(
               contentPadding: const EdgeInsets.only(left: Dimens.spacing_32),
               title:
-                  const Text(Strings.rooms, style: text_1F2024_16_Regular_w400),
+              const Text(Strings.rooms, style: text_1F2024_16_Regular_w400),
               onTap: () {
                 Navigator.pop(context, true);
                 Navigator.push(

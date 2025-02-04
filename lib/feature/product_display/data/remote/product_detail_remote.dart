@@ -1,3 +1,1 @@
-abstract class ProductDetailRemote{
-
-}
+abstract class ProductDetailRemote {}

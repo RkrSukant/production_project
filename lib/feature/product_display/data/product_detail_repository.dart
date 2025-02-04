@@ -1,3 +1,1 @@
-abstract class ProductDetailRepository{
-
-}
+abstract class ProductDetailRepository {}

@@ -1,11 +1,9 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'furniture_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class FurnitureModel{
-
+class FurnitureModel {
   @JsonKey(name: 'furniture_id')
   int id;
 
@@ -27,11 +25,21 @@ class FurnitureModel{
   @JsonKey(name: 'image')
   String? imageNames;
 
-  @JsonKey(name:'ar_model')
+  @JsonKey(name: 'ar_model')
   String? arObj;
 
-  FurnitureModel({required this.id, required this.title, required this.category, required this.price, required this.desc, required this.room, required this.imageNames, required this.arObj});
+  FurnitureModel(
+      {required this.id,
+      required this.title,
+      required this.category,
+      required this.price,
+      required this.desc,
+      required this.room,
+      required this.imageNames,
+      required this.arObj});
 
-  factory FurnitureModel.fromJson(Map<String,dynamic> json)=>_$FurnitureModelFromJson(json);
-  Map<String,dynamic> toJson() => _$FurnitureModelToJson(this);
+  factory FurnitureModel.fromJson(Map<String, dynamic> json) =>
+      _$FurnitureModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FurnitureModelToJson(this);
 }

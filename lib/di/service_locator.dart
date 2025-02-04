@@ -36,10 +36,9 @@ import 'package:production_project/feature/search/data/search_repository_impl.da
 import 'package:production_project/feature/search/screens/search_viewmodel.dart';
 import 'package:production_project/remote/http_client.dart';
 
-final GetIt locator =GetIt.instance;
+final GetIt locator = GetIt.instance;
 
 Future setUpServiceLocator() async {
-
   //for api
   locator.registerLazySingleton(() => ApiClient());
 
@@ -52,7 +51,8 @@ Future setUpServiceLocator() async {
   //categories
   locator.registerLazySingleton<CategoriesLocal>(() => CategoriesLocalImpl());
   locator.registerLazySingleton<CategoriesRemote>(() => CategoriesRemoteImpl());
-  locator.registerLazySingleton<CategoriesRepository>(() => CategoriesRepositoryImpl());
+  locator.registerLazySingleton<CategoriesRepository>(
+      () => CategoriesRepositoryImpl());
   locator.registerFactory<CategoriesViewModel>(() => CategoriesViewModel());
 
   //rooms
@@ -68,8 +68,12 @@ Future setUpServiceLocator() async {
   locator.registerFactory<SearchViewModel>(() => SearchViewModel());
 
   //product display
-  locator.registerLazySingleton<ProductDetailLocal>(() => ProductDetailLocalImpl());
-  locator.registerLazySingleton<ProductDetailRemote>(() => ProductDetailRemoteImpl());
-  locator.registerLazySingleton<ProductDetailRepository>(() => ProductDetailRepositoryImpl());
-  locator.registerFactory<ProductDetailViewModel>(() => ProductDetailViewModel());
+  locator.registerLazySingleton<ProductDetailLocal>(
+      () => ProductDetailLocalImpl());
+  locator.registerLazySingleton<ProductDetailRemote>(
+      () => ProductDetailRemoteImpl());
+  locator.registerLazySingleton<ProductDetailRepository>(
+      () => ProductDetailRepositoryImpl());
+  locator
+      .registerFactory<ProductDetailViewModel>(() => ProductDetailViewModel());
 }

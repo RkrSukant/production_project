@@ -1,3 +1,1 @@
-abstract class CategoriesLocal{
-
-}
+abstract class CategoriesLocal {}

@@ -6,7 +6,7 @@ import 'package:production_project/utils/strings.dart';
 
 import 'di/service_locator.dart' as di;
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.setUpServiceLocator();
   runApp(const MyApp());
@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override

@@ -1,3 +1,1 @@
-abstract class HomeLocal{
-
-}
+abstract class HomeLocal {}

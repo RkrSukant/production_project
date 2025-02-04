@@ -1,3 +1,1 @@
-abstract class ProductDetailLocal{
-
-}
+abstract class ProductDetailLocal {}

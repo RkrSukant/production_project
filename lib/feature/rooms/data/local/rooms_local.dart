@@ -1,3 +1,1 @@
-abstract class RoomsLocal{
-
-}
+abstract class RoomsLocal {}

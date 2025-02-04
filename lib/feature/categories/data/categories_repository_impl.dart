@@ -6,21 +6,19 @@ import 'package:production_project/feature/categories/data/local/categories_loca
 import 'package:production_project/feature/categories/data/remote/categories_remote.dart';
 import 'package:production_project/feature/categories/model/category_model.dart';
 
-class CategoriesRepositoryImpl implements CategoriesRepository{
+class CategoriesRepositoryImpl implements CategoriesRepository {
   final CategoriesRemote remote = locator<CategoriesRemote>();
   final CategoriesLocal local = locator<CategoriesLocal>();
 
   @override
-  Future<List<CategoryModel>> getCategoryList() async{
-    dynamic response =remote.getCategoryList();
+  Future<List<CategoryModel>> getCategoryList() async {
+    dynamic response = remote.getCategoryList();
     debugPrint(response.toString());
     return response;
   }
 
   @override
-  Future<List<FurnitureModel>> getCategoryFurnitureList(String categoryName){
+  Future<List<FurnitureModel>> getCategoryFurnitureList(String categoryName) {
     return remote.getCategoryFurnitureList(categoryName);
   }
-
-  
 }

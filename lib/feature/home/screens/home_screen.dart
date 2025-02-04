@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeViewModel viewModel = locator<HomeViewModel>();
   final TextEditingController _searchTextController = TextEditingController();
   final RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
           enablePullDown: true,
           onRefresh: _onRefresh,
           header: ClassicHeader(),
-          controller:_refreshController,
+          controller: _refreshController,
           child: Container(
             color: const AppColors().backGroundColor,
             child: SingleChildScrollView(
@@ -164,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         contentPadding:
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         hintText: Strings.search,
         hintStyle: text_8f9098_14_Regular_w400,
         filled: true,
@@ -319,11 +319,8 @@ class _HomeScreenState extends State<HomeScreen> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisExtent:
-          ((MediaQuery
-              .of(context)
-              .size
-              .width - Dimens.spacing_48) / 2) *
-              (3 / 5),
+              ((MediaQuery.of(context).size.width - Dimens.spacing_48) / 2) *
+                  (3 / 5),
           mainAxisSpacing: Dimens.spacing_6,
           crossAxisSpacing: Dimens.spacing_8,
         ),
@@ -358,7 +355,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                   return const Center(
                     child: CircularProgressIndicator(
-                      color: AppColors.purple_rgba_7b44c0,),
+                      color: AppColors.purple_rgba_7b44c0,
+                    ),
                   );
                 },
                 fit: BoxFit.cover,

@@ -22,7 +22,6 @@ class RoomsScreen extends StatefulWidget {
 }
 
 class _RoomsScreenState extends State<RoomsScreen> {
-
   RoomsViewModel viewModel = locator<RoomsViewModel>();
 
   List<RoomModel> rooms = [];
@@ -91,22 +90,22 @@ class _RoomsScreenState extends State<RoomsScreen> {
           return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisExtent: ((MediaQuery
-                    .of(context)
-                    .size
-                    .width - Dimens.spacing_48) / 2) * (3 / 5),
+                mainAxisExtent:
+                    ((MediaQuery.of(context).size.width - Dimens.spacing_48) /
+                            2) *
+                        (3 / 5),
                 mainAxisSpacing: Dimens.spacing_6,
                 crossAxisSpacing: Dimens.spacing_8,
               ),
               shrinkWrap: true,
               itemCount: items.length,
               itemBuilder: (context, index) {
-                return _roomGridComponent(
-                    items[index]);
-              }
-          );
+                return _roomGridComponent(items[index]);
+              });
         case ResponseState.ERROR:
-          return const Center(child: Text(Strings.something_went_wrong),);
+          return const Center(
+            child: Text(Strings.something_went_wrong),
+          );
         default:
           return Container();
       }
@@ -116,7 +115,8 @@ class _RoomsScreenState extends State<RoomsScreen> {
   Widget _roomGridComponent(RoomModel model) {
     return OnClickWidget(
       onClick: () {
-        Navigator.push(context, AnimScaleTransition(page: RoomResultScreen(roomName: model.title)));
+        Navigator.push(context,
+            AnimScaleTransition(page: RoomResultScreen(roomName: model.title)));
       },
       child: Card(
         child: Stack(
@@ -131,17 +131,23 @@ class _RoomsScreenState extends State<RoomsScreen> {
                     return child;
                   }
                   return const Center(
-                    child: CircularProgressIndicator(color: AppColors.purple_rgba_7b44c0,),
+                    child: CircularProgressIndicator(
+                      color: AppColors.purple_rgba_7b44c0,
+                    ),
                   );
                 },
                 model.imageName,
                 fit: BoxFit.cover,
               ),
             ),
-            Center(child: Padding(
-                padding: const EdgeInsets.all(Dimens.spacing_8),
-                child: Text(model.title, style: text_ffffff_16_Bold_w700,
-                  textAlign: TextAlign.center,))),
+            Center(
+                child: Padding(
+                    padding: const EdgeInsets.all(Dimens.spacing_8),
+                    child: Text(
+                      model.title,
+                      style: text_ffffff_16_Bold_w700,
+                      textAlign: TextAlign.center,
+                    ))),
           ],
         ),
       ),

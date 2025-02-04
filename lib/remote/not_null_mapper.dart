@@ -12,8 +12,7 @@ List<T> notNullMapperListRest<T>(BaseListResponse<T> baseResponse) {
     }
     throw FailedResponseException("Data is empty.");
   } else {
-    printLogMessage(
-        'notNullMapperListRest:error ------>${baseResponse.error}');
+    printLogMessage('notNullMapperListRest:error ------>${baseResponse.error}');
     throw FailedResponseException(baseResponse.error);
   }
 }
@@ -26,8 +25,7 @@ T notNullMapperRest<T>(BaseResponse<T> baseResponse) {
     }
     throw FailedResponseException("Data is empty.");
   } else {
-    printLogMessage(
-        'notNullMapperListRest:error ------>${baseResponse.error}');
+    printLogMessage('notNullMapperListRest:error ------>${baseResponse.error}');
     throw FailedResponseException(baseResponse.error);
   }
 }

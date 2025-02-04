@@ -1,4 +1,4 @@
-class ApiConstants{
+class ApiConstants {
   static String baseUrl = 'http://192.168.1.70:3000/';
 
   static String categories = 'categories';

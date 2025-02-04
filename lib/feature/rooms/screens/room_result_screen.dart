@@ -15,8 +15,7 @@ import 'package:provider/provider.dart';
 class RoomResultScreen extends StatefulWidget {
   final String roomName;
 
-  const RoomResultScreen({Key? key, required this.roomName})
-      : super(key: key);
+  const RoomResultScreen({Key? key, required this.roomName}) : super(key: key);
 
   @override
   State<RoomResultScreen> createState() => _RoomResultScreenState();
@@ -84,7 +83,7 @@ class _RoomResultScreenState extends State<RoomResultScreen> {
               viewModel.roomFurnitureListUseCase.data ?? [];
           return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: (1/1.5),
+                childAspectRatio: (1 / 1.5),
                 crossAxisCount: 2,
                 mainAxisSpacing: Dimens.spacing_6,
                 crossAxisSpacing: Dimens.spacing_8,

@@ -1,4 +1,4 @@
-enum ResponseState{
+enum ResponseState {
   LOADING,
   COMPLETE,
   ERROR

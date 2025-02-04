@@ -8,7 +8,7 @@ class ImageConstants {
   static const String IC_Banner_1 = "assets/images/Banner_1.jpg";
   static const String IC_Banner_2 = "assets/images/Banner_2.jpg";
   static const String IC_PLACEHOLDER = "assets/images/placeholder.jpg";
-  static const String IC_SPLASH_SCREEN= "assets/images/Splash_Screen_bg.png";
+  static const String IC_SPLASH_SCREEN = "assets/images/Splash_Screen_bg.png";
   static const String IC_CATEGORY_BED = "assets/images/categories/CategoriesBed.png";
   static const String IC_CATEGORY_CHAIRS = "assets/images/categories/CategoriesChairs.png";
   static const String IC_CATEGORY_COFFEE_TABLE = "assets/images/categories/CategoriesCoffeeTable.png";
@@ -22,7 +22,7 @@ class ImageConstants {
   static const String IC_SORT_BY_ROOMS_DINING_ROOM = "assets/images/sort_by_rooms/diningRoom.png";
   static const String IC_SORT_BY_ROOMS_LIVING_ROOM = "assets/images/sort_by_rooms/livingRoom.png";
   static const String IC_SORT_BY_ROOMS_OUTDOORS = "assets/images/sort_by_rooms/outdoors.png";
-  static const String IC_LOADING= "assets/images/loading.png";
-  static const String IC_AR_CORNER_BANNER= "assets/images/ar-corner-banner.png";
+  static const String IC_LOADING = "assets/images/loading.png";
+  static const String IC_AR_CORNER_BANNER = "assets/images/ar-corner-banner.png";
 
 }
